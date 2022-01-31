@@ -13,7 +13,7 @@ import styles from './Product.style'
 import util from '../../../utils/styles'
 import storage from '../../../services/storage'
 import { RouteComponentProps } from 'react-router'
-import { ProductModel } from '../../../@types'
+import { ProductModel, UserModel } from '../../../@types'
 import Symbols from '../../blocks/Symbols/Symbols'
 
 import CORROSIVO from '../../../assets/CORROSIVO.png'
@@ -46,7 +46,7 @@ const Product: React.FC<RouteComponentProps> = ({ history }) => {
   const [productId] = useState(window.location.href.split('?')[1])
   const [showModal, setShowModal] = useState(false)
   const [symbols, setSymbols] = useState<string>()
-  const user = storage.read('user')
+  const user: UserModel = storage.read('user')
 
   useEffect(() => {
     (async () => {
@@ -79,6 +79,10 @@ const Product: React.FC<RouteComponentProps> = ({ history }) => {
           storage: '',
           incompatibility: '',
           precautions: '',
+          quantity: '',
+          due_date: '',
+          batch: '',
+          location: '',
           user_id: user.id
         }
 
@@ -357,6 +361,86 @@ const Product: React.FC<RouteComponentProps> = ({ history }) => {
             const _product = product
             typeof _product?.precautions === 'string' ?
               _product.precautions = event.target.value
+              : null
+            setProduct(_product)
+          }}
+        />
+        <p className='error-message'>
+          Digite no mínimo 10 caracteres.
+        </p>
+
+        <styles.label htmlFor='quantity'>
+          Quantidade
+        </styles.label>
+        <styles.textarea
+          id='quantity'
+          minLength={10}
+          maxLength={10}
+          defaultValue={product?.quantity}
+          onChange={event => {
+            const _product = product
+            typeof _product?.quantity === 'string' ?
+              _product.quantity = event.target.value
+              : null
+            setProduct(_product)
+          }}
+        />
+        <p className='error-message'>
+          Digite no mínimo 10 caracteres.
+        </p>
+
+        <styles.label htmlFor='due_date'>
+          Vencimento
+        </styles.label>
+        <styles.textarea
+          id='due_date'
+          minLength={10}
+          maxLength={20}
+          defaultValue={product?.due_date}
+          onChange={event => {
+            const _product = product
+            typeof _product?.due_date === 'string' ?
+              _product.due_date = event.target.value
+              : null
+            setProduct(_product)
+          }}
+        />
+        <p className='error-message'>
+          Digite no mínimo 10 caracteres.
+        </p>
+
+        <styles.label htmlFor='batch'>
+          Lote
+        </styles.label>
+        <styles.textarea
+          id='batch'
+          minLength={10}
+          maxLength={20}
+          defaultValue={product?.batch}
+          onChange={event => {
+            const _product = product
+            typeof _product?.batch === 'string' ?
+              _product.batch = event.target.value
+              : null
+            setProduct(_product)
+          }}
+        />
+        <p className='error-message'>
+          Digite no mínimo 10 caracteres.
+        </p>
+
+        <styles.label htmlFor='location'>
+          Local de armazenamento
+        </styles.label>
+        <styles.textarea
+          id='location'
+          minLength={10}
+          maxLength={20}
+          defaultValue={product?.location}
+          onChange={event => {
+            const _product = product
+            typeof _product?.location === 'string' ?
+              _product.location = event.target.value
               : null
             setProduct(_product)
           }}

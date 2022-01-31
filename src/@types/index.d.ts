@@ -53,7 +53,11 @@ interface ProductModel {
   storage: string
   incompatibility: string
   precautions: string
-  user_id: string
+  quantity?: string
+  due_date?: string
+  batch?: string
+  location?: string
+  user_id?: string
   created_at?: Date
   updated_at?: Date
 }
