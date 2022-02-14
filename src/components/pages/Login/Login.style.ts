@@ -17,6 +17,13 @@ const form = styled.form`
     height: 100%;
     width: 100%;
     padding: 2.5rem;
+
+    .icon {
+      position: absolute;
+      font-size: 4rem;
+      margin-left: 35rem;
+      cursor: pointer;
+    }
 `
 
 const logo = styled.div`

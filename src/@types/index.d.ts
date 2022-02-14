@@ -36,11 +36,12 @@ interface UserModel {
     update_at?: Date
 }
 
-interface RefreshTokenModel {
-    id: number
-    uuid: string
-    user_id: number
-    expiresIn: string
+interface LabModel {
+    id?: string
+    name: string
+    location: string
+    created_at?: Date
+    update_at?: Date
 }
 
 interface ProductModel {
@@ -65,7 +66,8 @@ interface ProductModel {
 interface HeaderComponent extends RouteComponentProps {
     color?: string
     fontColor?: string
-    backButton: () => void
+    backButton?: () => void
+    optionsButton?: () => void
     title: string
 }
 
@@ -98,12 +100,12 @@ interface SymbolsComponent {
 }
 
 export {
-  RefreshTokenModel,
   APIRequestOptions,
   CustomAxiosInstance,
   RealTimeBuffer,
   WebsocketConfigOptions,
   UserModel,
+  LabModel,
   ProductModel,
   HeaderComponent,
   ButtonsComponent,

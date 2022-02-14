@@ -13,11 +13,11 @@ const logo = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     min-height: 15rem;
 
     img {
         width: 13.5rem;
-        margin: 0rem 0rem -3rem 0rem;
     }
 `
 

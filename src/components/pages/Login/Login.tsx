@@ -8,7 +8,8 @@ import { version } from '../../../../package.json'
 
 import {
   FaEye as ShowPasswordIcon,
-  FaEyeSlash as HidePasswordIcon
+  FaEyeSlash as HidePasswordIcon,
+  FaInfoCircle as InfoIcon
 } from 'react-icons/fa'
 
 import logo from '../../../assets/logo.png'
@@ -30,7 +31,6 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
     setError(false)
     setLoading(true)
 
-
     const result = await api.request({
       method: 'get',
       route: '/user/auth',
@@ -50,7 +50,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
       })
 
       if (result?.status === 200) {
-        history.push('/products')
+        history.push('/labs')
       } else {
         setLoading(false)
         setErrorMessage('Não foi possível obter os dados')
@@ -138,6 +138,10 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
             placeholder='Senha'
           />
         </styles.password>
+
+        <InfoIcon
+          className='icon'
+        />
 
         {loading ?
           <styles.loading

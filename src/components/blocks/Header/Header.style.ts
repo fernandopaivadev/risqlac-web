@@ -19,6 +19,8 @@ const header = styled.div`
       margin-left: 2rem;
       margin-left: auto;
       margin-right: auto;
+      grid-column-start: 1;
+      grid-column-end: 2;
    }
 
    p {
@@ -28,6 +30,21 @@ const header = styled.div`
       letter-spacing: 0.2rem;
       margin-left: auto;
       margin-right: auto;
+      grid-column-start: 2;
+      grid-column-end: 3;
+   }
+
+   .optionsIcon {
+      font-size: 4rem;
+      color: var(--black);
+      background: var(--white);
+      border: none;
+      border-radius: 50%;
+      margin-left: 2rem;
+      margin-left: auto;
+      margin-right: auto;
+      grid-column-start: 3;
+      grid-column-end: 4;
    }
 
    img {

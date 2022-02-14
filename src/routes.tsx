@@ -9,8 +9,13 @@ import ResetPassword from './components/pages/ResetPassword/ResetPassword'
 import User from './components/pages/User/User'
 import Users from './components/pages/Users/Users'
 
+import Lab from './components/pages/Lab/Lab'
+import Labs from './components/pages/Labs/Labs'
+
 import Product from './components/pages/Product/Product'
 import Products from './components/pages/Products/Products'
+
+import Options from './components/pages/Options/Options'
 
 import storage from './services/storage'
 
@@ -22,8 +27,13 @@ const pages: { [key: string]: React.FC<RouteComponentProps> } = {
   User,
   Users,
 
+  Lab,
+  Labs,
+
   Product,
-  Products
+  Products,
+
+  Options
 }
 
 const routes = Object.keys(pages).map(key => ({

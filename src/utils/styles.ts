@@ -144,8 +144,14 @@ const circularProgress = styled.progress`
     }
 `
 
+const blackButton = styled(classicButton)`
+    background: var(--black);
+    color: var(--white);
+`
+
 export default {
   classicButton,
   criticalButton,
-  circularProgress
+  circularProgress,
+  blackButton
 }

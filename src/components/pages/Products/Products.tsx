@@ -71,8 +71,8 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
 
     <Header
       title='Lista de produtos'
-      backButton={() => {
-        history.push('/settings')
+      optionsButton={() => {
+        history.push('/options')
       }}
     />
 
@@ -106,12 +106,6 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
                           event.target.value.toLowerCase()
                         )
                       )
-                    } else if (searchBy === 'Subclasse') {
-                      _productsToShow = products.filter(product =>
-                        product.subclass.toLowerCase().includes(
-                          event.target.value.toLowerCase()
-                        )
-                      )
                     }
 
                     setProductsToShow(_productsToShow)
@@ -126,7 +120,6 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
               >
                 <option>Nome</option>
                 <option>Classe</option>
-                <option>Subclasse</option>
               </select>
             </div>
           </styles.searchContainer>

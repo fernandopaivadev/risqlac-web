@@ -18,7 +18,6 @@ const Buttons: React.FC<ButtonsComponent> = ({ buttons, header }) =>
         src={logo}
         alt='Tech Amazon Logo'
       />
-      <styles.title>Uirapuru</styles.title>
     </styles.logo>
 
     <styles.buttons>

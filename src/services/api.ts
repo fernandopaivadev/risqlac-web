@@ -3,8 +3,7 @@ import storage from './storage'
 
 import {
   APIRequestOptions,
-  CustomAxiosInstance,
-  RefreshTokenModel
+  CustomAxiosInstance
 } from '../@types'
 
 const baseURL = 'http://localhost:3000'
@@ -28,8 +27,7 @@ const request = async ({
   route,
   query,
   body,
-  noStore = false,
-  retry = true
+  noStore = false
 }: APIRequestOptions): Promise<{
     status:
     number,
@@ -61,73 +59,12 @@ const request = async ({
     return { status, data }
   } catch (err: any) {
     if (err?.response?.data?.message) {
-      if (err?.response?.status === 401) {
-        const refreshToken: RefreshTokenModel | null = storage.read('refreshToken')
-
-        if (refreshToken) {
-          try {
-            const { id } = refreshToken
-
-            const { status, data } = await axiosInstance.get(
-              '/user/refresh-token', {
-                params: {
-                  id
-                }
-              }
-            )
-
-            if (status === 200) {
-              storage.write('token', data.token)
-              storage.write('refreshToken', data.refreshToken)
-
-              if (retry) {
-                return await request({
-                  method,
-                  route,
-                  query,
-                  body,
-                  noStore,
-                  retry: false
-                })
-              } else {
-                window.location.reload()
-              }
-            } else if (status === 401) {
-              window.location.replace(
-                `${window.location.href.split('#')[0]}#/login`
-              )
-            }
-          } catch (err: any) {
-            if (err?.response?.status === 404) {
-              if (retry) {
-                return await request({
-                  method,
-                  route,
-                  query,
-                  body,
-                  noStore,
-                  retry: false
-                })
-              }
-            } else if (err?.response?.status === 500) {
-              window.location.replace(
-                `${window.location.href.split('#')[0]}#/login`
-              )
-            } else {
-              return null
-            }
-          }
-        } else {
-          console.log(
-            'API REQUEST: ERRO DE REQUISIÇÃO > missing refresh token'
-          )
-        }
-      }
-
-      console.log(`ERRO NO SERVIDOR: ${err?.response?.data?.message
-      }`)
+      window.location.replace(
+        `${window.location.href.split('#')[0]}#/login`
+      )
     } else if (err?.message) {
-      console.log(`API REQUEST: ERRO DE REQUISIÇÃO >: ${err?.message
+      console.log(`API REQUEST: ERRO DE REQUISIÇÃO >: ${
+        err?.message
       }`)
     } else {
       console.log('API REQUEST: ERRO NÃO IDENTIFICADO')
