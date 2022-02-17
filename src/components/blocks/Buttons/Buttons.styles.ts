@@ -14,7 +14,7 @@ const logo = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 15rem;
+    min-height: 12rem;
 
     img {
         width: 13.5rem;
@@ -33,7 +33,7 @@ const buttons = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 1rem;
+    margin: 0 1rem 1rem 1rem;
 
     button {
         width: 35rem;

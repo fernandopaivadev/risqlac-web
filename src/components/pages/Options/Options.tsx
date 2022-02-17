@@ -26,13 +26,6 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
         }
         buttons={[
           {
-            name: 'Lista de Produtos',
-            color: colorButton,
-            onClick: () => {
-              history.push('/products')
-            }
-          },
-          {
             name: 'Alterar Senha',
             color: colorButton,
             onClick: () => {
@@ -59,6 +52,14 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
             fontColor: 'var(--white)',
             onClick: () => {
               history.push('/users')
+            }
+          },
+          {
+            name: 'Lista de laboratórios',
+            color: colorButtonAdmin,
+            fontColor: 'var(--white)',
+            onClick: () => {
+              history.push('/labs')
             }
           },
           {
@@ -118,6 +119,14 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
             color: colorButton,
             onClick: () => {
               history.push('/change-email')
+            }
+          },
+          {
+            name: 'Lista de laboratórios',
+            color: colorButtonAdmin,
+            fontColor: 'var(--white)',
+            onClick: () => {
+              history.push('/labs')
             }
           },
           {

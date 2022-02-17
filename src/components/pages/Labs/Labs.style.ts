@@ -26,6 +26,12 @@ const container = styled.div`
     .icon {
         font-size: 2.5rem;
     }
+
+    .lab-icon {
+        font-size: 5rem;
+        width: 100%;
+    }
+
 `
 
 const lab = styled.div`
@@ -54,7 +60,7 @@ const infos = styled.div`
 
     p {
         color: var(--black);
-        font-size: 1.8rem;
+        font-size: 2rem;
         font-weight: 500;
         letter-spacing: 0.2rem;
         margin: 0 3rem 0.5rem 0;

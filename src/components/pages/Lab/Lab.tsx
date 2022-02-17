@@ -61,7 +61,7 @@ const Lab: React.FC<RouteComponentProps> = ({ history }) => {
         }).catch((err: any) => {
           console.log(`SUBMIT ERROR> ${err.message}`)
         })
-        console.log(result)
+
         if (result?.status === 201) {
           history.push('/labs')
         } else {
@@ -77,7 +77,7 @@ const Lab: React.FC<RouteComponentProps> = ({ history }) => {
 
   return <styles.main>
     <Header
-      title='USF'
+      title='Laboratório'
       backButton={() => {
         history.goBack()
       }}
@@ -104,7 +104,7 @@ const Lab: React.FC<RouteComponentProps> = ({ history }) => {
       </p>
 
       <styles.label htmlFor='location'>
-        Location
+        Localização
       </styles.label>
       <styles.input
         id='location'

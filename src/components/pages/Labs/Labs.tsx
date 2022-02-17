@@ -44,16 +44,11 @@ const Labs: React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(true)
 
     if (labId) {
-      const result = await api.request({
-        method: 'get',
-        route: '/lab/data',
-        query: {
-          id: labId
-        }
-      })
+      const lab = labs?.filter(lab => lab.id === labId)[0]
 
-      if (result?.status === 200) {
-        history.push('/dashboard')
+      if (lab) {
+        storage.write('lab', lab)
+        history.push('/products')
       } else {
         history.push('/login')
       }
@@ -115,7 +110,7 @@ const Labs: React.FC<RouteComponentProps> = ({ history }) => {
     <Header
       title='Lista de Laboratórios'
       backButton={() => {
-        history.push('/settings')
+        history.push('/options')
       }}
     />
 
@@ -164,7 +159,7 @@ const Labs: React.FC<RouteComponentProps> = ({ history }) => {
                       }}
                     >
                       <LabIcon
-                        className='icon'
+                        className='lab-icon'
                       />
                       <styles.infos>
                         <p
@@ -172,7 +167,6 @@ const Labs: React.FC<RouteComponentProps> = ({ history }) => {
                         >
                           {lab.name}
                         </p>
-                        <p>{lab.name}</p>
                         <p>{lab.location}</p>
                       </styles.infos>
                     </styles.lab>

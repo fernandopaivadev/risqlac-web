@@ -21,13 +21,17 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
   const [productId, setProductId] = useState<string>()
   const [searchBy, setSearchBy] = useState('Nome')
   const [productsToShow, setProductsToShow] = useState<ProductModel[]>([])
+  const lab = storage.read('lab')
   const isAdmin = storage.read('user')?.is_admin
 
   useEffect(() => {
     (async () => {
       const result = await api.request({
         method: 'get',
-        route: '/product/list'
+        route: '/product/list',
+        query: {
+          id: lab.id
+        }
       })
 
       if (result?.status === 200) {
@@ -71,6 +75,9 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
 
     <Header
       title='Lista de produtos'
+      backButton={() => {
+        history.goBack()
+      }}
       optionsButton={() => {
         history.push('/options')
       }}
