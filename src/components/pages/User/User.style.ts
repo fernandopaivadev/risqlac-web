@@ -91,6 +91,14 @@ const container = styled.div`
     width: 100%;
 `
 
+const list = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    min-height: 100vh;
+`
+
 export default {
   main,
   form,
@@ -100,5 +108,6 @@ export default {
   loading,
   loadingAll,
   errorMessage,
-  container
+  container,
+  list
 }

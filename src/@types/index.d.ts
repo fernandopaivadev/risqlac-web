@@ -33,7 +33,8 @@ interface UserModel {
     phone: string
     password?: string
     created_at?: Date
-    update_at?: Date
+    update_at?: Date,
+    labs?: users[]
 }
 
 interface LabModel {
@@ -99,6 +100,11 @@ interface SymbolsComponent {
     storeSymbolId: (symbolId: string) => void
 }
 
+interface UserToLabComponent {
+    taskOnCancel: () => void
+    taskOnComplete: () => void
+}
+
 export {
   APIRequestOptions,
   CustomAxiosInstance,
@@ -112,5 +118,6 @@ export {
   ModalComponent,
   NavBarComponent,
   SubmitEvent,
-  SymbolsComponent
+  SymbolsComponent,
+  UserToLabComponent
 }

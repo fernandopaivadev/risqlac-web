@@ -11,16 +11,19 @@ import {
 
 import styles from './User.style'
 import util from '../../../utils/styles'
-import storage from '../../../services/storage'
 import { RouteComponentProps } from 'react-router'
 import { UserModel } from '../../../@types'
+
+import UserToLab from '../../blocks/UserToLab/UserToLab'
+
+import { MdLocationOn as LabIcon } from 'react-icons/md'
 
 const User: React.FC<RouteComponentProps> = ({ history }) => {
   const [user, setUser] = useState<UserModel>()
   const [loading, setLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState<string | null>()
-  const [isAdmin] = useState(storage.read('user')?.is_admin)
   const [userId] = useState(window.location.href.split('?')[1])
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -105,6 +108,18 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
         history.goBack()
       }}
     />
+
+    {showModal ?
+      <UserToLab
+        taskOnComplete={() => {
+          setShowModal(false)
+        }}
+        taskOnCancel={() => {
+          setShowModal(false)
+        }}
+      />
+      : null
+    }
 
     {!loading ?
       <styles.form id='user-form'>
@@ -220,13 +235,44 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
             Digite no mínimo 3 caracteres.
         </p>
 
-        {isAdmin ?
-          <styles.select>
-            <option>Aluno</option>
-            <option>Professor / Técnico</option>
-          </styles.select>
-          : null
-        }
+        <styles.select>
+          <option>Aluno</option>
+          <option>Professor / Técnico</option>
+        </styles.select>
+
+        <styles.label htmlFor='person-name'>
+          Laboratórios
+        </styles.label>
+        <styles.list>
+          {user?.labs?.map(lab =>
+            <styles.lab>
+              <LabIcon
+                className='lab-icon'
+              />
+              <styles.infos>
+                <p
+                  className='name'
+                >
+                  {lab.name}
+                </p>
+                <p>{lab.location}</p>
+              </styles.infos>
+            </styles.lab>
+          )}
+        </styles.list>
+
+        <p className='error-message'>
+            Digite no mínimo 3 caracteres.
+        </p>
+
+        <util.classicButton
+          onClick={event => {
+            event.preventDefault()
+            setShowModal(true)
+          }}
+        >
+          Adicionar laboratório
+        </util.classicButton>
 
         {!loading ?
           <util.classicButton
@@ -235,7 +281,7 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
               submit(user)
             }}
           >
-              Salvar
+            Salvar
           </util.classicButton>
           :
           <styles.loading>

@@ -70,8 +70,8 @@ const Users: React.FC<RouteComponentProps> = ({ history }) => {
 
     <Header
       title='Lista de usuários'
-      backButton={() => {
-        history.push('/settings')
+      optionsButton={() => {
+        history.push('/options')
       }}
     />
 

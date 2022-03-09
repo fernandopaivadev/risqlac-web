@@ -86,7 +86,7 @@ const Labs: React.FC<RouteComponentProps> = ({ history }) => {
           setLabs(_labs)
         }
       }
-    }, 10000)
+    }, 30000)
 
     if (labIdToDelete) {
       const _deleteSchedule = deleteSchedule
@@ -109,7 +109,7 @@ const Labs: React.FC<RouteComponentProps> = ({ history }) => {
 
     <Header
       title='Lista de Laboratórios'
-      backButton={() => {
+      optionsButton={() => {
         history.push('/options')
       }}
     />
