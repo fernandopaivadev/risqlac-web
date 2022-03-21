@@ -55,7 +55,7 @@ const Routes: React.FC = () => <Router>
 
     <Redirect to={
       authenticated ?
-        '/products'
+        '/options'
         :
         '/login'
     } />

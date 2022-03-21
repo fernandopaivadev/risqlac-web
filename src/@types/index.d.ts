@@ -103,6 +103,10 @@ interface SymbolsComponent {
 interface UserToLabComponent {
     taskOnCancel: () => void
     taskOnComplete: () => void
+    data: {
+        user_id: string
+        access_level: 'admin' | 'student'
+    }
 }
 
 export {

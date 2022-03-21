@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import Header from '../../blocks/Header/Header'
 
 import api from '../../../services/api'
+import storage from '../../../services/storage'
+
 import {
   convert,
   format,
@@ -12,11 +14,12 @@ import {
 import styles from './User.style'
 import util from '../../../utils/styles'
 import { RouteComponentProps } from 'react-router'
-import { UserModel } from '../../../@types'
+import { LabModel, UserModel } from '../../../@types'
 
 import UserToLab from '../../blocks/UserToLab/UserToLab'
 
 import { MdLocationOn as LabIcon } from 'react-icons/md'
+import { FaTrashAlt as DeleteIcon } from 'react-icons/fa'
 
 const User: React.FC<RouteComponentProps> = ({ history }) => {
   const [user, setUser] = useState<UserModel>()
@@ -24,26 +27,76 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
   const [errorMessage, setErrorMessage] = useState<string | null>()
   const [userId] = useState(window.location.href.split('?')[1])
   const [showModal, setShowModal] = useState(false)
+  const [labs, setLabs] = useState<LabModel[]>()
+  const isAdmin = storage.read('user').is_admin
+
+  const getUserData = async () => {
+    const result = await api.request({
+      method: 'get',
+      route: '/user/data',
+      query: {
+        id: userId
+      },
+      noStore: true
+    })
+
+    if (result?.status === 200) {
+      setUser(result?.data?.user)
+    }
+  }
+
+  const getLabsList = async () => {
+    const result = await api.request({
+      method: 'get',
+      route: '/lab/list',
+      query: {
+        id: userId
+      },
+      noStore: true
+    })
+
+    if (result?.status === 200) {
+      setLabs(result?.data?.labs)
+    }
+  }
+
+  const removeLab = async (labId: string) => {
+    const result = await api.request({
+      method: 'put',
+      route: '/user/remove-lab',
+      query: {
+        id: userId,
+        labId: labId
+      },
+      noStore: true
+    })
+    console.log(result)
+    if (result?.status === 200) {
+      console.log(result?.data?.labs)
+      setLabs(result?.data?.labs)
+    }
+    const _labs = labs
+    const labToRemoveIndex = _labs?.map((lab, index) => {
+      if (lab.id === labId) {
+        return index
+      }
+    })[0]
+
+    if (labToRemoveIndex) {
+      _labs?.splice(labToRemoveIndex, 1)
+      setLabs(_labs)
+    }
+  }
 
   useEffect(() => {
     (async () => {
       if (userId) {
         setLoading(true)
-        const result = await api.request({
-          method: 'get',
-          route: '/user/data',
-          query: {
-            id: userId
-          },
-          noStore: true
+        await Promise.all([
+          getUserData(), getLabsList()
+        ]).then(() => {
+          setLoading(false)
         })
-
-        if (result?.status === 200) {
-          setUser(result?.data?.user)
-          setLoading(false)
-        } else {
-          setLoading(false)
-        }
       } else {
         const _user = {
           username: '',
@@ -116,6 +169,10 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
         }}
         taskOnCancel={() => {
           setShowModal(false)
+        }}
+        data={{
+          user_id: userId,
+          access_level: 'student'
         }}
       />
       : null
@@ -244,20 +301,37 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
           Laboratórios
         </styles.label>
         <styles.list>
-          {user?.labs?.map(lab =>
-            <styles.lab>
-              <LabIcon
-                className='lab-icon'
-              />
-              <styles.infos>
-                <p
-                  className='name'
-                >
-                  {lab.name}
-                </p>
-                <p>{lab.location}</p>
-              </styles.infos>
-            </styles.lab>
+          {labs?.map(lab =>
+            <styles.labsContainer>
+              <styles.lab>
+                <LabIcon
+                  className='lab-icon'
+                />
+                <styles.infos>
+                  <p
+                    className='name'
+                  >
+                    {lab.name}
+                  </p>
+                  <p>{
+                    lab.location
+                  }</p>
+                </styles.infos>
+              </styles.lab>
+
+              {isAdmin ?
+                <DeleteIcon
+                  className='icon'
+                  onClick={() => {
+                    if (lab.id) {
+                      console.log(lab.id)
+                      removeLab(lab.id)
+                    }
+                  }}
+                />
+                : null
+              }
+            </styles.labsContainer>
           )}
         </styles.list>
 

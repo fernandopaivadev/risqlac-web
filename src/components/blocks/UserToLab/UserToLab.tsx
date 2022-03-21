@@ -4,7 +4,11 @@ import api from '../../../services/api'
 import util from '../../../utils/styles'
 import styles from './UserToLab.style'
 
-const Symbols: React.FC<UserToLabComponent> = ({ taskOnComplete, taskOnCancel }) => {
+const Symbols: React.FC<UserToLabComponent> = ({
+  taskOnComplete,
+  taskOnCancel,
+  data
+}) => {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
   const [targetLabId, setTargetLabId] = useState<string>()
@@ -29,8 +33,21 @@ const Symbols: React.FC<UserToLabComponent> = ({ taskOnComplete, taskOnCancel })
   const submit = async () => {
     const result = await api.request({
       method: 'post',
-      route: '/lab'
+      route: '/user/add-lab',
+      query: {
+        ...data,
+        lab_id: targetLabId
+      }
     })
+
+    if (result?.status === 201) {
+      taskOnComplete()
+    } else {
+      setError(true)
+      setTimeout(() => {
+        setError(false)
+      }, 3000)
+    }
   }
 
   return <styles.main>
@@ -41,15 +58,21 @@ const Symbols: React.FC<UserToLabComponent> = ({ taskOnComplete, taskOnCancel })
             <select
               id='select'
               onChange={event => {
-                setTargetLabId(
-                  event.target.id
-                )
+                const labId = labs.find(lab =>
+                  lab.name.toUpperCase() === event.target.value
+                )?.id
+
+                if (labId) {
+                  setTargetLabId(labId)
+                }
               }}
             >
 
-              <option>Escolha o laboratório</option>
+              <option>
+                Escolha o laboratório
+              </option>
               {labs.map(lab =>
-                <option id={lab.id}>{lab.name.toUpperCase()}</option>
+                <option>{lab.name.toUpperCase()}</option>
               )}
             </select>
 
@@ -57,7 +80,7 @@ const Symbols: React.FC<UserToLabComponent> = ({ taskOnComplete, taskOnCancel })
               <util.classicButton
                 onClick={() => {
                   if (targetLabId) {
-                    taskOnComplete()
+                    submit()
                   } else {
                     setError(true)
                     setTimeout(() => {

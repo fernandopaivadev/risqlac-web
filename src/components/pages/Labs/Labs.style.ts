@@ -31,7 +31,6 @@ const container = styled.div`
         font-size: 5rem;
         width: 100%;
     }
-
 `
 
 const lab = styled.div`
@@ -70,6 +69,7 @@ const infos = styled.div`
         font-weight: 600;
     }
 `
+
 const noLab = styled.div`
     display: flex;
     flex-direction: column;
