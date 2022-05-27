@@ -1,78 +1,62 @@
-import axios, { AxiosRequestConfig } from 'axios'
-import storage from './storage'
+import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 
 import {
-  APIRequestOptions,
-  CustomAxiosInstance
+  APIRequest,
+  Storage
 } from '../@types'
+import navigate from '../functions/navigate'
+import storage from './storage'
 
-const baseURL = 'http://localhost:3000'
+const baseURL = 'https://api.techamazon.tech/'
 
-const axiosInstance: CustomAxiosInstance = axios.create({
+const Axios = axios.create({
   baseURL
 })
 
-axiosInstance.interceptors.request.use(async (config: AxiosRequestConfig) => {
+Axios.interceptors.request.use(async (config: AxiosRequestConfig) => {
   const token = storage.read('token')
 
-  if (token) {
-    config?.headers ? config.headers.authorization = `Bearer ${token}` : null
+  if (token && config.headers) {
+    config.headers.authorization = `Bearer ${token}`
   }
 
   return config
 })
-
 const request = async ({
   method,
   route,
   query,
   body,
-  noStore = false
-}: APIRequestOptions): Promise<{
-    status:
-    number,
-    data?: {
-        [key: string]: any
-    }
-} | null> => {
-  try {
-    if (body) {
-      body.params = query
-    } else {
-      body = {
-        params: query
-      }
-    }
+  formData,
+  store = true
+}: APIRequest.Options): Promise<APIRequest.Response | null> => {
+  let statusError: APIRequest.Response['status'] | null = null
 
-    const { status, data } = await axiosInstance[method](route, body)
+  const response: any = await Axios({
+    method,
+    url: route,
+    params: query ? new URLSearchParams({ ...query }) : undefined,
+    data: formData ? formData : body,
+    headers: formData ? { 'Content-Type': 'multipart/form-data' } : undefined
+  }).catch((err: AxiosError) => {
+    statusError = err.response ? err.response.status : null
 
-    if (status === 200 && method === 'get') {
-      const keys = Object.keys(data)
-
-      if (!noStore) {
-        keys.forEach(key => {
-          storage.write(key, data[key])
-        })
-      }
+    if (statusError === 401) {
+      storage.clear('all')
+      window.location.pathname === '/login' ?
+        null : navigate('/login')
     }
+  })
 
-    return { status, data }
-  } catch (err: any) {
-    if (err?.response?.data?.message) {
-      window.location.replace(
-        `${window.location.href.split('#')[0]}#/login`
-      )
-    } else if (err?.message) {
-      console.log(`API REQUEST: ERRO DE REQUISIÇÃO >: ${
-        err?.message
-      }`)
-    } else {
-      console.log('API REQUEST: ERRO NÃO IDENTIFICADO')
-    }
+  if (response?.data && store) {
+    Object.keys(response.data).forEach((key) => {
+      storage.write(key as Storage.key, response.data[key])
+    })
+  }
 
-    return {
-      status: err?.response?.status
-    }
+  return {
+    status: response ? response?.status : statusError ? statusError : 500,
+    data: response ? response?.data : null
   }
 }
 

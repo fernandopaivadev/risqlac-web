@@ -27,9 +27,6 @@ const pages: { [key: string]: React.FC<RouteComponentProps> } = {
   User,
   Users,
 
-  Lab,
-  Labs,
-
   Product,
   Products,
 

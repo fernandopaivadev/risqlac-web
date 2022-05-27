@@ -1,127 +1,88 @@
-import { ComponentProps, SetStateAction } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { Method } from 'axios'
+import FormData from 'form-data'
 
-interface CustomAxiosInstance extends AxiosInstance {
-    [key: string]: any
-}
-
-interface APIRequestOptions {
-    method: string
+export namespace APIRequest {
+  interface Options {
+    method: Method
     route: string
     query?: { [key: string]: any }
     body?: {
-        [key: string]: any
+      [key: string]: any
     }
-    noStore?: boolean
-    retry?: boolean
+    formData?: FormData
+    store?: boolean
+  }
+
+  interface Response {
+    status: number,
+    data?: {
+      [key: string]: any
+    } | null
+  }
 }
 
-interface RealTimeBuffer { [key: string]: any }[]
-
-interface WebsocketConfigOptions {
-    realTimeBuffer: RealTimeBuffer
-    setRealTimeBuffer: SetStateAction
-    setNewMessage: SetStateAction
-}
-
-interface UserModel {
-    id?: string
+export namespace Models {
+  interface User {
+    id: string
     username: string
     is_admin?: boolean
     name: string
     email: string
     phone: string
-    password?: string
-    created_at?: Date
-    update_at?: Date,
-    labs?: users[]
+    created_at: Date
+    updated_at: Date
+  }
+
+  type NewUser = Omit<User, 'id', 'created_at', 'updated_at'>
+
+  type Users = {
+    id: number
+    username: string
+    email: string
+    phone: string
+    is_admin: string
+  }[]
 }
 
-interface LabModel {
-    id?: string
-    name: string
-    location: string
-    created_at?: Date
-    update_at?: Date
-}
-
-interface ProductModel {
-  id?: string
-  name: string
-  synonym: string
-  symbols?: string
-  class: string
-  subclass: string
-  storage: string
-  incompatibility: string
-  precautions: string
-  quantity?: string
-  due_date?: string
-  batch?: string
-  location?: string
-  user_id?: string
-  created_at?: Date
-  updated_at?: Date
-}
-
-interface HeaderComponent extends RouteComponentProps {
+export namespace Components {
+  interface Header {
     color?: string
     fontColor?: string
-    backButton?: () => void
-    optionsButton?: () => void
+    backButton: () => void
     title: string
-}
+  }
 
-interface ButtonsComponent extends RouteComponentProps {
+  interface Buttons {
     buttons: {
-        name: string
-        color: string
-        fontColor?: string
-        onClick: () => void
+      name: string
+      color: string
+      fontColor?: string
+      onClick: () => void
     }[]
     header: Header
-}
+  }
 
-interface ModalComponent extends ComponentProps {
-    message: string
-    taskOnYes: () => void
-    taskOnNo: () => void
-}
-
-
-interface NavBarComponent extends RouteComponentProps {
-    option: string
-}
-
-interface SubmitEvent extends React.FormEvent<HTMLFormElement> {}
-
-interface SymbolsComponent {
-    taskOnCancel: () => void
-    storeSymbolId: (symbolId: string) => void
-}
-
-interface UserToLabComponent {
-    taskOnCancel: () => void
-    taskOnComplete: () => void
-    data: {
-        user_id: string
-        access_level: 'admin' | 'student'
+  interface Modal {
+    message: string | ReactElement
+    ok?: {
+      text: string
+      onClick: () => void
+    },
+    cancel: {
+      text: string
     }
+    onRequestClose: () => void
+    isOpen: boolean
+  }
 }
 
-export {
-  APIRequestOptions,
-  CustomAxiosInstance,
-  RealTimeBuffer,
-  WebsocketConfigOptions,
-  UserModel,
-  LabModel,
-  ProductModel,
-  HeaderComponent,
-  ButtonsComponent,
-  ModalComponent,
-  NavBarComponent,
-  SubmitEvent,
-  SymbolsComponent,
-  UserToLabComponent
+export type SubmitEvent = React.FormEvent<HTMLFormElement>
+
+export namespace Storage {
+  export type key =
+    'user' |
+    'loggedUser' |
+    'unit' |
+    'token'
 }
+
