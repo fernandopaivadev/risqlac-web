@@ -3,58 +3,35 @@ const convert = {
     input?.replace(/\D/g, '')
   ,
 
-  date: (input: string): string => {
-    const splitDate = input.split('/')
-    return `${splitDate[2]
-    }-${splitDate[1]
-    }-${splitDate[0]
-    }`
-  },
-
-  dateFromTimestamp: (timeStamp: string | Date | undefined): string => {
+  dateStringFromTimestamp: (timeStamp: string | Date | undefined | null): string => {
     if (timeStamp) {
       if (typeof timeStamp === 'string') {
         const splitTimeStamp = timeStamp.split('T')[0].split('-')
 
-        return `${
-          splitTimeStamp[2]
-        }/${
-          splitTimeStamp[1]
-        }/${
-          splitTimeStamp[0]
-        }`
+        return `${splitTimeStamp[2]}/${splitTimeStamp[1]}/${splitTimeStamp[0]}`
       } else {
         const day = timeStamp.getDate()
         const month = timeStamp.getMonth()
         const year = timeStamp.getFullYear()
 
-        return `${
-          day
-        }/${
-          month
-        }/${
-          year
-        }`
+        return `${day + 1}/${month + 1}/${year}`
       }
     } else {
       return ''
     }
   },
 
-  timeFromTimestamp: (timestamp: string | Date | undefined): string => {
+  timeFromTimestamp: (timestamp: string | Date | undefined | null): string => {
     if (timestamp) {
       const dateTime = new Date(timestamp)
 
-      return `${dateTime.getHours()
-      }:${dateTime.getMinutes()
-      }:${dateTime.getSeconds()
-      }`
+      return `${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`
     } else {
       return ''
     }
   },
 
-  dateStringFromTimestamp: (timestamp: string): Date => {
+  dateObjectFromDateString: (timestamp: string): Date => {
     const dateElements = timestamp.split('/')
     const date = new Date()
     date.setDate(Number(dateElements[0]))
@@ -79,8 +56,8 @@ const validate = {
     const inputs = Array.from(element.children)
       .filter(({ tagName }) =>
         tagName === 'INPUT'
-                ||
-                tagName === 'TEXTAREA'
+        ||
+        tagName === 'TEXTAREA'
       )
 
     inputs.forEach((input: any): void => {
@@ -110,8 +87,8 @@ const validate = {
 
     const inputs = children.filter(child =>
       child.tagName === 'INPUT'
-            ||
-            child.tagName === 'TEXTAREA'
+      ||
+      child.tagName === 'TEXTAREA'
     )
 
     const errorMessages = children.filter(child =>
@@ -146,7 +123,8 @@ const format = {
 
   username: (input: string | undefined): string =>
     input ? input
-      ?.replace(/[\W_]/g, '')
+      ?.trim()
+      .replace(/[\W_]/g, '')
       .toLowerCase()
       : ''
   ,

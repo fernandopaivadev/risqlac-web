@@ -1,12 +1,11 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import { BsArrowLeftShort as BackIcon } from 'react-icons/bs'
 import { IoMdSettings as OptionsIcon } from 'react-icons/io'
 
-import { HeaderComponent } from '../../../@types'
+import { Components } from '../../../@types'
 import styles from './Header.style'
 
-const Header: React.FC<HeaderComponent> = ({
+const Header: React.FC<Components.Header> = ({
   color,
   fontColor,
   backButton,
@@ -35,4 +34,4 @@ const Header: React.FC<HeaderComponent> = ({
   }
 </styles.header >
 
-export default withRouter(Header)
+export default Header

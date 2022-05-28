@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SymbolsComponent } from '../../../@types'
+import { Components } from '../../../@types'
 import util from '../../../utils/styles'
 import styles from './Symbols.style'
 
@@ -25,7 +25,7 @@ const symbolsIndex: { [key: string]: string } = {
   TOXICO
 }
 
-const Symbols: React.FC<SymbolsComponent> = ({ storeSymbolId, taskOnCancel }) => {
+const Symbols: React.FC<Components.Symbols> = ({ storeSymbolId, taskOnCancel }) => {
   const [error, setError] = useState(false)
   const [symbolName, setSymbolName] = useState<string>()
 
@@ -68,13 +68,13 @@ const Symbols: React.FC<SymbolsComponent> = ({ storeSymbolId, taskOnCancel }) =>
               }
             }}
           >
-              Selecionar
+            Selecionar
           </util.classicButton>
 
           <util.criticalButton
             onClick={taskOnCancel}
           >
-              Cancelar
+            Cancelar
           </util.criticalButton>
         </div>
       </>

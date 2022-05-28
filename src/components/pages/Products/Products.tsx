@@ -11,16 +11,17 @@ import { ImLab as ProductIcon } from 'react-icons/im'
 
 import styles from './Products.style'
 import util from '../../../utils/styles'
-import { ProductModel } from '../../../@types'
+import { Models } from '../../../@types'
 import { RouteComponentProps } from 'react-router'
+import navigate from '../../../functions/navigate'
 
-const Products: React.FC<RouteComponentProps> = ({ history }) => {
-  const [products, setProducts] = useState<ProductModel[]>([])
+const Products: React.FC<RouteComponentProps> = () => {
+  const [products, setProducts] = useState<Models.Product[]>([])
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [productId, setProductId] = useState<string>()
   const [searchBy, setSearchBy] = useState('Nome')
-  const [productsToShow, setProductsToShow] = useState<ProductModel[]>([])
+  const [productsToShow, setProductsToShow] = useState<Models.Product[]>([])
   const lab = storage.read('lab')
   const isAdmin = storage.read('user')?.is_admin
 
@@ -39,7 +40,7 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
         setProductsToShow(result?.data?.products)
         setLoading(false)
       } else {
-        history.push('/login')
+        navigate('/login')
       }
     })()
   }, [])
@@ -65,9 +66,15 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
     {showModal ?
       <Modal
         message='Você tem certeza?'
-        taskOnYes={remove}
-        taskOnNo={() => {
-          setShowModal(false)
+        ok={{
+          onClick: remove,
+          text: 'Sim'
+        }}
+        cancel={{
+          onClick: () => {
+            setShowModal(false)
+          },
+          text: 'Não'
         }}
       />
       : null
@@ -76,10 +83,10 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
     <Header
       title='Lista de produtos'
       backButton={() => {
-        history.goBack()
+        navigate('/products')
       }}
       optionsButton={() => {
-        history.push('/options')
+        navigate('/options')
       }}
     />
 
@@ -99,7 +106,7 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
                   if (event.target.value === '') {
                     setProductsToShow(products)
                   } else {
-                    let _productsToShow: ProductModel[] = []
+                    let _productsToShow: Models.Product[] = []
 
                     if (searchBy === 'Nome') {
                       _productsToShow = products.filter(product =>
@@ -133,7 +140,7 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
 
           <util.classicButton
             onClick={() => {
-              history.push('/product')
+              navigate('/product')
             }}
           >
             Novo produto
@@ -144,7 +151,7 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
             >
               <styles.product
                 onClick={() => {
-                  history.push(`/product?${product.id}`)
+                  navigate(`/product?${product.id}`)
                 }}
               >
                 <ProductIcon
@@ -177,7 +184,7 @@ const Products: React.FC<RouteComponentProps> = ({ history }) => {
         <styles.noProduct>
           <util.classicButton
             onClick={() => {
-              history.push('/product')
+              navigate('/product')
             }}
           >
             Novo produto

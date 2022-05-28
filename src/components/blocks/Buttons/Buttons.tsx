@@ -1,12 +1,11 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 
-import { ButtonsComponent } from '../../../@types'
+import { Components } from '../../../@types'
 import Header from '../../blocks/Header/Header'
 import styles from './Buttons.styles'
 import logo from '../../../assets/logo.png'
 
-const Buttons: React.FC<ButtonsComponent> = ({ buttons, header }) =>
+const Buttons: React.FC<Components.Buttons> = ({ buttons, header }) =>
   <styles.main>
     <Header
       {...header}
@@ -36,4 +35,4 @@ const Buttons: React.FC<ButtonsComponent> = ({ buttons, header }) =>
     </styles.buttons>
   </styles.main>
 
-export default withRouter(Buttons)
+export default Buttons

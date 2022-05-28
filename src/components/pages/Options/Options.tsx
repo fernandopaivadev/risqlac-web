@@ -1,5 +1,6 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
+import navigate from '../../../functions/navigate'
 
 import storage from '../../../services/storage'
 
@@ -7,7 +8,7 @@ import Buttons from '../../blocks/Buttons/Buttons'
 
 import styles from './Options.styles'
 
-const Options: React.FC<RouteComponentProps> = ({ history }) => {
+const Options: React.FC<RouteComponentProps> = () => {
   const isAdmin = !(storage.read('user')?.access_level === 'admin')
   const colorButton = 'var(--yellow)'
   const colorButtonAdmin = 'var(--black)'
@@ -20,7 +21,7 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
             title: 'Opções',
             color: 'var(--black)',
             backButton: () => {
-              history.push('/products')
+              navigate('/products')
             }
           }
         }
@@ -29,21 +30,21 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
             name: 'Alterar Senha',
             color: colorButton,
             onClick: () => {
-              history.push('/change-password')
+              navigate('/change-password')
             }
           },
           {
             name: 'Alterar número de telefone',
             color: colorButton,
             onClick: () => {
-              history.push('/change-phone')
+              navigate('/change-phone')
             }
           },
           {
             name: 'Alterar e-mail',
             color: colorButton,
             onClick: () => {
-              history.push('/change-email')
+              navigate('/change-email')
             }
           },
           {
@@ -51,7 +52,7 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
             color: colorButtonAdmin,
             fontColor: 'var(--white)',
             onClick: () => {
-              history.push('/users')
+              navigate('/users')
             }
           },
           {
@@ -59,14 +60,14 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
             color: colorButtonAdmin,
             fontColor: 'var(--white)',
             onClick: () => {
-              history.push('/labs')
+              navigate('/labs')
             }
           },
           {
             name: 'Sobre o GHS',
             color: colorButton,
             onClick: () => {
-              history.push('/login')
+              navigate('/login')
               storage.clear('all')
             }
           },
@@ -74,7 +75,7 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
             name: 'Créditos',
             color: colorButton,
             onClick: () => {
-              history.push('/login')
+              navigate('/login')
               storage.clear('all')
             }
           },
@@ -82,7 +83,7 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
             name: 'Sair',
             color: colorButton,
             onClick: () => {
-              history.push('/login')
+              navigate('/login')
               storage.clear('all')
             }
           }
@@ -95,7 +96,7 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
             title: 'Opções',
             color: 'var(--black)',
             backButton: () => {
-              history.push('/products')
+              navigate('/products')
             }
           }
         }
@@ -104,21 +105,21 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
             name: 'Alterar Senha',
             color: colorButton,
             onClick: () => {
-              history.push('/change-password')
+              navigate('/change-password')
             }
           },
           {
             name: 'Alterar número de telefone',
             color: colorButton,
             onClick: () => {
-              history.push('/change-phone')
+              navigate('/change-phone')
             }
           },
           {
             name: 'Alterar e-mail',
             color: colorButton,
             onClick: () => {
-              history.push('/change-email')
+              navigate('/change-email')
             }
           },
           {
@@ -126,14 +127,14 @@ const Options: React.FC<RouteComponentProps> = ({ history }) => {
             color: colorButtonAdmin,
             fontColor: 'var(--white)',
             onClick: () => {
-              history.push('/labs')
+              navigate('/labs')
             }
           },
           {
             name: 'Sair',
             color: colorButton,
             onClick: () => {
-              history.push('/login')
+              navigate('/login')
               storage.clear('all')
             }
           }

@@ -14,8 +14,9 @@ import styles from './User.style'
 import util from '../../../utils/styles'
 import { RouteComponentProps } from 'react-router'
 import { Models } from '../../../@types'
+import navigate from '../../../functions/navigate'
 
-const User: React.FC<RouteComponentProps> = ({ history }) => {
+const User: React.FC<RouteComponentProps> = () => {
   const [user, setUser] = useState<Models.User | Models.NewUser>()
   const [loading, setLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState<string | null>()
@@ -71,7 +72,7 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
         })
 
         if (result?.status === 200) {
-          history.push('/users')
+          navigate('/users')
         } else {
           setErrorMessage('Preencha os campos corretamente')
           setLoading(false)
@@ -86,7 +87,7 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
         })
 
         if (result?.status === 201) {
-          history.push('/users')
+          navigate('/users')
         } else {
           setErrorMessage('Preencha os campos corretamente')
           setLoading(false)
@@ -102,14 +103,14 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
     <Header
       title='Usuário'
       backButton={() => {
-        history.goBack()
+        navigate('/products')
       }}
     />
 
     {!loading ?
       <styles.form id='user-form'>
         <styles.label htmlFor='nameUC'>
-            Nome de usuário*
+          Nome de usuário*
         </styles.label>
         <styles.input
           id='nameUC'
@@ -126,11 +127,11 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
           }}
         />
         <p className='error-message'>
-            Digite no mínimo 6 caracteres.
+          Digite no mínimo 6 caracteres.
         </p>
 
         <styles.label htmlFor='phone'>
-            Telefone*
+          Telefone*
         </styles.label>
         <styles.input
           id='phone'
@@ -148,11 +149,11 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
           }}
         />
         <p className='error-message'>
-            Digite um número de telefone válido.
+          Digite um número de telefone válido.
         </p>
 
         <styles.label htmlFor='email'>
-            Email*
+          Email*
         </styles.label>
         <styles.input
           id='email'
@@ -169,14 +170,14 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
           }}
         />
         <p className='error-message'>
-            Digite no mínimo 6 caracteres.
+          Digite no mínimo 6 caracteres.
         </p>
         {userId ?
           null
           :
           <>
             <styles.label htmlFor='password'>
-                Senha*
+              Senha*
             </styles.label>
             <styles.input
               id='password'
@@ -194,13 +195,13 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
               }}
             />
             <p className='error-message'>
-                Digite no mínimo 6 caracteres.
+              Digite no mínimo 6 caracteres.
             </p>
           </>
         }
 
         <styles.label htmlFor='person-name'>
-            Nome
+          Nome
         </styles.label>
         <styles.input
           id='person-name'
@@ -217,7 +218,7 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
           }}
         />
         <p className='error-message'>
-            Digite no mínimo 3 caracteres.
+          Digite no mínimo 3 caracteres.
         </p>
 
         <styles.select>
@@ -226,7 +227,7 @@ const User: React.FC<RouteComponentProps> = ({ history }) => {
         </styles.select>
 
         <p className='error-message'>
-            Digite no mínimo 3 caracteres.
+          Digite no mínimo 3 caracteres.
         </p>
 
         {!loading ?

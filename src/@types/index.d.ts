@@ -42,13 +42,35 @@ export namespace Models {
     phone: string
     is_admin: string
   }[]
+
+  interface Product {
+    id: string
+    name: string
+    synonym: string
+    symbols: string
+    class: string
+    subclass: string
+    storage: string
+    incompatibility: string
+    precautions: string
+    quantity?: string
+    due_date?: string
+    batch?: string
+    location?: string
+    user_id?: string
+    created_at: Date
+    updated_at: Date
+  }
+
+  type NewProduct = Omit<Product, 'id' | 'created_at' | 'updated_at'>
 }
 
 export namespace Components {
   interface Header {
     color?: string
     fontColor?: string
-    backButton: () => void
+    backButton?: () => void
+    optionsButton?: () => void
     title: string
   }
 
@@ -69,10 +91,14 @@ export namespace Components {
       onClick: () => void
     },
     cancel: {
+      onClick: () => void
       text: string
     }
-    onRequestClose: () => void
-    isOpen: boolean
+  }
+
+  interface Symbols {
+    taskOnCancel: () => void
+    storeSymbolId: (symbolId: string) => void
   }
 }
 

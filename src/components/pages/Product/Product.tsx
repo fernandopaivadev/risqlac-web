@@ -13,7 +13,7 @@ import styles from './Product.style'
 import util from '../../../utils/styles'
 import storage from '../../../services/storage'
 import { RouteComponentProps } from 'react-router'
-import { ProductModel, UserModel } from '../../../@types'
+import { Models } from '../../../@types'
 import Symbols from '../../blocks/Symbols/Symbols'
 
 import CORROSIVO from '../../../assets/CORROSIVO.png'
@@ -25,6 +25,7 @@ import OXIDANTE from '../../../assets/OXIDANTE.png'
 import PERIGO_A_SAUDE from '../../../assets/PERIGO_A_SAUDE.png'
 import PERIGO_AO_MEIO_AMBIENTE from '../../../assets/PERIGO_AO_MEIO_AMBIENTE.png'
 import TOXICO from '../../../assets/TOXICO.png'
+import navigate from '../../../functions/navigate'
 
 const symbolsIndex: { [key: string]: string } = {
   CORROSIVO,
@@ -38,15 +39,15 @@ const symbolsIndex: { [key: string]: string } = {
   TOXICO
 }
 
-const Product: React.FC<RouteComponentProps> = ({ history }) => {
-  const [product, setProduct] = useState<ProductModel>()
+const Product: React.FC<RouteComponentProps> = () => {
+  const [product, setProduct] = useState<Models.Product | Models.NewProduct>()
   const [loading, setLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState<string | null>()
   const [isAdmin] = useState(storage.read('user')?.is_admin)
   const [productId] = useState(window.location.href.split('?')[1])
   const [showModal, setShowModal] = useState(false)
   const [symbols, setSymbols] = useState<string>()
-  const user: UserModel = storage.read('user')
+  const user: Models.User = storage.read('user')
 
   useEffect(() => {
     (async () => {
@@ -57,8 +58,7 @@ const Product: React.FC<RouteComponentProps> = ({ history }) => {
           route: '/product/data',
           query: {
             id: productId
-          },
-          noStore: true
+          }
         })
 
         if (result?.status === 200) {
@@ -92,7 +92,7 @@ const Product: React.FC<RouteComponentProps> = ({ history }) => {
     })()
   }, [])
 
-  const submit = async (product: ProductModel | undefined) => {
+  const submit = async (product: Models.Product | Models.NewProduct | undefined) => {
     setLoading(true)
     setErrorMessage(null)
 
@@ -110,7 +110,7 @@ const Product: React.FC<RouteComponentProps> = ({ history }) => {
         })
 
         if (result?.status === 200) {
-          history.push('/products')
+          navigate('/products')
         } else {
           setErrorMessage('Preencha os campos corretamente')
           setLoading(false)
@@ -128,7 +128,7 @@ const Product: React.FC<RouteComponentProps> = ({ history }) => {
         })
 
         if (result?.status === 201) {
-          history.push('/products')
+          navigate('/products')
         } else {
           setErrorMessage('Preencha os campos corretamente')
           setLoading(false)
@@ -177,7 +177,7 @@ const Product: React.FC<RouteComponentProps> = ({ history }) => {
     <Header
       title='Produto'
       backButton={() => {
-        history.goBack()
+        navigate('/products')
       }}
     />
 

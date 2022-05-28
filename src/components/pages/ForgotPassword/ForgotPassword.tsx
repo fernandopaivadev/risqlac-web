@@ -9,8 +9,9 @@ import { BsArrowLeftShort as BackIcon } from 'react-icons/bs'
 import styles from './ForgotPassword.style'
 import util from '../../../utils/styles'
 import { RouteComponentProps } from 'react-router'
+import navigate from '../../../functions/navigate'
 
-const ForgotPassword: React.FC<RouteComponentProps> = ({ history }) => {
+const ForgotPassword: React.FC<RouteComponentProps> = () => {
   const [username, setUsername] = useState('')
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -48,7 +49,7 @@ const ForgotPassword: React.FC<RouteComponentProps> = ({ history }) => {
       <BackIcon
         className='backIcon'
         onClick={() => {
-          history.push('/login')
+          navigate('/login')
         }}
       />
     </styles.back>
@@ -59,21 +60,21 @@ const ForgotPassword: React.FC<RouteComponentProps> = ({ history }) => {
           alt='Tech Amazon Logo'
         />
         <styles.title>
-                    Uirapuru
+          Uirapuru
         </styles.title>
         <styles.subtitle>
-                    SOFTWARE DE GESTÃO DE ENERGIA ELÉTRICA
+          SOFTWARE DE GESTÃO DE ENERGIA ELÉTRICA
         </styles.subtitle>
       </styles.logo>
 
       {emailSent ?
         <styles.message>
-                    Enviamos um link para o seu email
+          Enviamos um link para o seu email
         </styles.message>
         :
         <>
           <styles.label>
-                        E-mail ou nome de usuário
+            E-mail ou nome de usuário
           </styles.label>
           <styles.input
             required
@@ -92,16 +93,16 @@ const ForgotPassword: React.FC<RouteComponentProps> = ({ history }) => {
         : emailSent ?
           <util.classicButton
             onClick={() => {
-              history.push('/login')
+              navigate('/login')
             }}
           >
-                        FAZER LOGIN
+            FAZER LOGIN
           </util.classicButton>
           :
           <util.classicButton
             type='submit'
           >
-                        ENVIAR LINK
+            ENVIAR LINK
           </util.classicButton>
       }
 

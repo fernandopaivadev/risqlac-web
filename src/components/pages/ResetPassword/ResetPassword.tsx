@@ -7,8 +7,9 @@ import styles from './ResetPassword.style'
 import util from '../../../utils/styles'
 import { RouteComponentProps } from 'react-router'
 import { SubmitEvent } from '../../../@types'
+import navigate from '../../../functions/navigate'
 
-const ResetPassword: React.FC<RouteComponentProps> = ({ history }) => {
+const ResetPassword: React.FC<RouteComponentProps> = () => {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
@@ -20,9 +21,9 @@ const ResetPassword: React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(true)
     setError(false)
 
-    const token = history
+    const token = window
       .location
-      .search
+      .href
       .split('?token=')[1]
 
     const result = await api.request({
@@ -37,7 +38,7 @@ const ResetPassword: React.FC<RouteComponentProps> = ({ history }) => {
     if (result?.status === 200) {
       setLoading(false)
       setPasswordChanged(true)
-      history.push('/login')
+      navigate('/login')
     } else if (result?.status === 404) {
       setErrorMessage('Usuário não encontrado')
       setLoading(false)
@@ -58,21 +59,21 @@ const ResetPassword: React.FC<RouteComponentProps> = ({ history }) => {
             alt='Tech Amazon Logo'
           />
           <styles.title>
-                        Uirapuru
+            Uirapuru
           </styles.title>
           <styles.subtitle>
-                        SOFTWARE DE GESTÃO DE ENERGIA ELÉTRICA
+            SOFTWARE DE GESTÃO DE ENERGIA ELÉTRICA
           </styles.subtitle>
         </styles.logo>
 
         {passwordChanged ?
           <styles.message>
-                        Senha alterada com sucesso
+            Senha alterada com sucesso
           </styles.message>
           :
           <>
             <styles.label>
-                            Digite a nova senha
+              Digite a nova senha
             </styles.label>
             <styles.input
               required
@@ -93,17 +94,17 @@ const ResetPassword: React.FC<RouteComponentProps> = ({ history }) => {
             <util.classicButton
               className='classic-button'
               onClick={() => {
-                history.push('/login')
+                navigate('/login')
               }}
             >
-                            FAZER LOGIN
+              FAZER LOGIN
             </util.classicButton>
             :
             <util.classicButton
               type='submit'
               className='classic-button'
             >
-                            SALVAR
+              SALVAR
             </util.classicButton>
         }
 

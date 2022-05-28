@@ -13,11 +13,12 @@ import {
 
 import styles from './Users.style'
 import util from '../../../utils/styles'
-import { UserModel } from '../../../@types'
+import { Models } from '../../../@types'
 import { RouteComponentProps } from 'react-router'
+import navigate from '../../../functions/navigate'
 
-const Users: React.FC<RouteComponentProps> = ({ history }) => {
-  const [users, setUsers] = useState<UserModel[]>()
+const Users: React.FC<RouteComponentProps> = () => {
+  const [users, setUsers] = useState<Models.User[]>()
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [userId, setUserId] = useState<string>()
@@ -34,7 +35,7 @@ const Users: React.FC<RouteComponentProps> = ({ history }) => {
         setUsers(result?.data?.users)
         setLoading(false)
       } else {
-        history.push('/login')
+        navigate('/login')
       }
     })()
   }, [])
@@ -60,9 +61,15 @@ const Users: React.FC<RouteComponentProps> = ({ history }) => {
     {showModal ?
       <Modal
         message='Você tem certeza?'
-        taskOnYes={remove}
-        taskOnNo={() => {
-          setShowModal(false)
+        ok={{
+          onClick: remove,
+          text: 'Sim'
+        }}
+        cancel={{
+          onClick: () => {
+            setShowModal(false)
+          },
+          text: 'Não'
         }}
       />
       : null
@@ -71,7 +78,7 @@ const Users: React.FC<RouteComponentProps> = ({ history }) => {
     <Header
       title='Lista de usuários'
       optionsButton={() => {
-        history.push('/options')
+        navigate('/options')
       }}
     />
 
@@ -80,7 +87,7 @@ const Users: React.FC<RouteComponentProps> = ({ history }) => {
         <styles.list>
           <util.classicButton
             onClick={() => {
-              history.push('/user')
+              navigate('/user')
             }}
           >
             Novo usuário
@@ -91,7 +98,7 @@ const Users: React.FC<RouteComponentProps> = ({ history }) => {
             >
               <styles.user
                 onClick={() => {
-                  history.push(`/user?${user.id}`)
+                  navigate(`/user?${user.id}`)
                 }}
               >
                 <UserIcon
@@ -132,7 +139,7 @@ const Users: React.FC<RouteComponentProps> = ({ history }) => {
         <styles.noUser>
           <util.classicButton
             onClick={() => {
-              history.push('/user')
+              navigate('/user')
             }}
           >
             Novo usuário

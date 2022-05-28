@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { ModalComponent } from '../../../@types'
+import { Components } from '../../../@types'
 import styles from './Modal.style'
 import util from '../../../utils/styles'
 
-const Modal: React.FC<ModalComponent> = ({ message, taskOnYes, taskOnNo }) =>
+const Modal: React.FC<Components.Modal> = ({ message, ok, cancel }) =>
   <styles.main>
     <styles.window
       data-testid='window'
@@ -13,19 +13,22 @@ const Modal: React.FC<ModalComponent> = ({ message, taskOnYes, taskOnNo }) =>
         {message}
       </p>
       <div>
-        <util.classicButton
-          id='yes'
-          data-testid='yes'
-          onClick={taskOnYes}
-        >
-                    Sim
-        </util.classicButton>
+        {ok ?
+          <util.classicButton
+            id='yes'
+            data-testid='yes'
+            onClick={ok.onClick}
+          >
+            {ok.text}
+          </util.classicButton>
+          : null
+        }
         <util.criticalButton
           id='no'
           data-testid='no'
-          onClick={taskOnNo}
+          onClick={cancel.onClick}
         >
-                    Não
+          {cancel.text}
         </util.criticalButton>
       </div>
     </styles.window>

@@ -16,8 +16,9 @@ import logo from '../../../assets/logo.png'
 import styles from './Login.style'
 import util from '../../../utils/styles'
 import { SubmitEvent } from '../../../@types'
+import navigate from '../../../functions/navigate'
 
-const Login: React.FC<RouteComponentProps> = ({ history }) => {
+const Login: React.FC<RouteComponentProps> = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -50,7 +51,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
       })
 
       if (result?.status === 200) {
-        history.push('/labs')
+        navigate('/labs')
       } else {
         setLoading(false)
         setErrorMessage('Não foi possível obter os dados')
@@ -89,7 +90,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
             SOFTWARE DE CADASTRO DE PRODUTOS QUÍMICOS
           </styles.subtitle>
           <styles.subtitle>
-                        v{version}
+            v{version}
           </styles.subtitle>
         </styles.logo>
 
@@ -163,16 +164,16 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
             <styles.link
               data-testid='link'
               onClick={() => {
-                history.push('/forgot-password')
+                navigate('/forgot-password')
               }}>
-                Esqueci minha senha
+              Esqueci minha senha
             </styles.link>
             <styles.link
               data-testid='link'
               onClick={() => {
-                history.push('/user')
+                navigate('/user')
               }}>
-                Cadastre-se
+              Cadastre-se
             </styles.link>
           </>
         }
