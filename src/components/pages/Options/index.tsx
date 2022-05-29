@@ -1,14 +1,13 @@
 import React from 'react'
-import { RouteComponentProps } from 'react-router'
 import navigate from '../../../functions/navigate'
 
 import storage from '../../../services/storage'
 
-import Buttons from '../../blocks/Buttons/Buttons'
+import Buttons from '../../blocks/Buttons'
 
-import styles from './Options.styles'
+import styles from './styles'
 
-const Options: React.FC<RouteComponentProps> = () => {
+const Options: React.FC = () => {
   const isAdmin = !(storage.read('user')?.access_level === 'admin')
   const colorButton = 'var(--yellow)'
   const colorButtonAdmin = 'var(--black)'

@@ -102,8 +102,6 @@ export namespace Components {
   }
 }
 
-export type SubmitEvent = React.FormEvent<HTMLFormElement>
-
 export namespace Storage {
   export type key =
     'user' |

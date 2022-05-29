@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { Components } from '../../../@types'
-import Header from '../../blocks/Header/Header'
-import styles from './Buttons.styles'
+import Header from '../Header'
+import styles from './styles'
 import logo from '../../../assets/logo.png'
 
 const Buttons: React.FC<Components.Buttons> = ({ buttons, header }) =>

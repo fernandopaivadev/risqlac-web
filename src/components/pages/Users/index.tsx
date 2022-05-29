@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import Header from '../../blocks/Header/Header'
-import Modal from '../../blocks/Modal/Modal'
+import Header from '../../blocks/Header'
+import Modal from '../../blocks/Modal'
 
 import api from '../../../services/api'
 import storage from '../../../services/storage'
@@ -11,13 +11,12 @@ import {
   FaUser as UserIcon
 } from 'react-icons/fa'
 
-import styles from './Users.style'
+import styles from './style'
 import util from '../../../utils/styles'
 import { Models } from '../../../@types'
-import { RouteComponentProps } from 'react-router'
 import navigate from '../../../functions/navigate'
 
-const Users: React.FC<RouteComponentProps> = () => {
+const Users: React.FC = () => {
   const [users, setUsers] = useState<Models.User[]>()
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)

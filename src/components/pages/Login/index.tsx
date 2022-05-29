@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { RouteComponentProps } from 'react-router'
 
 import api from '../../../services/api'
 import storage from '../../../services/storage'
@@ -13,12 +12,11 @@ import {
 } from 'react-icons/fa'
 
 import logo from '../../../assets/logo.png'
-import styles from './Login.style'
+import styles from './style'
 import util from '../../../utils/styles'
-import { SubmitEvent } from '../../../@types'
 import navigate from '../../../functions/navigate'
 
-const Login: React.FC<RouteComponentProps> = () => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -26,9 +24,7 @@ const Login: React.FC<RouteComponentProps> = () => {
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
-  const submit = async (event: SubmitEvent) => {
-    event.preventDefault()
-
+  const submit = async () => {
     setError(false)
     setLoading(true)
 
@@ -78,7 +74,7 @@ const Login: React.FC<RouteComponentProps> = () => {
 
   return <>
     <styles.main>
-      <styles.form onSubmit={submit}>
+      <styles.form>
         <styles.logo
           data-testid='logo'
         >
@@ -154,6 +150,10 @@ const Login: React.FC<RouteComponentProps> = () => {
           <util.classicButton
             data-testid='button'
             type='submit'
+            onClick={event => {
+              event.preventDefault()
+              submit()
+            }}
           >
             Entrar
           </util.classicButton>

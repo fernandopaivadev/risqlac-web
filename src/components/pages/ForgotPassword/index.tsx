@@ -2,24 +2,21 @@ import React, { useState } from 'react'
 
 import api from '../../../services/api'
 import logo from '../../../assets/logo.png'
-import { SubmitEvent } from '../../../@types'
 
 import { BsArrowLeftShort as BackIcon } from 'react-icons/bs'
 
-import styles from './ForgotPassword.style'
+import styles from './style'
 import util from '../../../utils/styles'
-import { RouteComponentProps } from 'react-router'
 import navigate from '../../../functions/navigate'
 
-const ForgotPassword: React.FC<RouteComponentProps> = () => {
+const ForgotPassword: React.FC = () => {
   const [username, setUsername] = useState('')
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [emailSent, setEmailSent] = useState(false)
 
-  const submit = async (event: SubmitEvent) => {
-    event.preventDefault()
+  const submit = async () => {
     setLoading(true)
 
     const result = await api.request({
@@ -53,7 +50,7 @@ const ForgotPassword: React.FC<RouteComponentProps> = () => {
         }}
       />
     </styles.back>
-    <styles.form onSubmit={submit}>
+    <styles.form>
       <styles.logo>
         <img
           src={logo}
@@ -92,7 +89,8 @@ const ForgotPassword: React.FC<RouteComponentProps> = () => {
         </styles.loading>
         : emailSent ?
           <util.classicButton
-            onClick={() => {
+            onClick={event => {
+              event.preventDefault()
               navigate('/login')
             }}
           >
@@ -101,6 +99,10 @@ const ForgotPassword: React.FC<RouteComponentProps> = () => {
           :
           <util.classicButton
             type='submit'
+            onClick={event => {
+              event.preventDefault()
+              submit()
+            }}
           >
             ENVIAR LINK
           </util.classicButton>

@@ -1,16 +1,16 @@
 import React, { ReactElement } from 'react'
 
-import Login from './components/pages/Login/Login'
-import ForgotPassword from './components/pages/ForgotPassword/ForgotPassword'
-import ResetPassword from './components/pages/ResetPassword/ResetPassword'
+import Login from './components/pages/Login'
+import ForgotPassword from './components/pages/ForgotPassword'
+import ResetPassword from './components/pages/ResetPassword'
 
-import User from './components/pages/User/User'
-import Users from './components/pages/Users/Users'
+import User from './components/pages/User'
+import Users from './components/pages/Users'
 
-import Product from './components/pages/Product/Product'
-import Products from './components/pages/Products/Products'
+import Product from './components/pages/Product'
+import Products from './components/pages/Products'
 
-import Options from './components/pages/Options/Options'
+import Options from './components/pages/Options'
 
 
 export default (): ReactElement => {

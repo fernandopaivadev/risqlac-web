@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import Header from '../../blocks/Header/Header'
+import Header from '../../blocks/Header'
 
 import api from '../../../services/api'
 
@@ -10,13 +10,12 @@ import {
   validate,
 } from '../../../services/validation'
 
-import styles from './User.style'
+import styles from './style'
 import util from '../../../utils/styles'
-import { RouteComponentProps } from 'react-router'
 import { Models } from '../../../@types'
 import navigate from '../../../functions/navigate'
 
-const User: React.FC<RouteComponentProps> = () => {
+const User: React.FC = () => {
   const [user, setUser] = useState<Models.User | Models.NewUser>()
   const [loading, setLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState<string | null>()

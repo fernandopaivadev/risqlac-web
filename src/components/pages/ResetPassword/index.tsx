@@ -3,21 +3,18 @@ import React, { useState } from 'react'
 import api from '../../../services/api'
 import logo from '../../../assets/logo.png'
 
-import styles from './ResetPassword.style'
+import styles from './style'
 import util from '../../../utils/styles'
-import { RouteComponentProps } from 'react-router'
-import { SubmitEvent } from '../../../@types'
 import navigate from '../../../functions/navigate'
 
-const ResetPassword: React.FC<RouteComponentProps> = () => {
+const ResetPassword: React.FC = () => {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [password, setPassword] = useState('')
   const [passwordChanged, setPasswordChanged] = useState(false)
 
-  const submit = async (event: SubmitEvent) => {
-    event.preventDefault()
+  const submit = async () => {
     setLoading(true)
     setError(false)
 
@@ -52,7 +49,7 @@ const ResetPassword: React.FC<RouteComponentProps> = () => {
 
   return (
     <styles.main>
-      <styles.form onSubmit={submit}>
+      <styles.form>
         <styles.logo>
           <img
             src={logo}
@@ -93,7 +90,8 @@ const ResetPassword: React.FC<RouteComponentProps> = () => {
           : passwordChanged ?
             <util.classicButton
               className='classic-button'
-              onClick={() => {
+              onClick={event => {
+                event.preventDefault()
                 navigate('/login')
               }}
             >
@@ -103,6 +101,10 @@ const ResetPassword: React.FC<RouteComponentProps> = () => {
             <util.classicButton
               type='submit'
               className='classic-button'
+              onClick={event => {
+                event.preventDefault()
+                submit()
+              }}
             >
               SALVAR
             </util.classicButton>

@@ -3,7 +3,7 @@ import { BsArrowLeftShort as BackIcon } from 'react-icons/bs'
 import { IoMdSettings as OptionsIcon } from 'react-icons/io'
 
 import { Components } from '../../../@types'
-import styles from './Header.style'
+import styles from './style'
 
 const Header: React.FC<Components.Header> = ({
   color,

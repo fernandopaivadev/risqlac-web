@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Components } from '../../../@types'
 import util from '../../../utils/styles'
-import styles from './Symbols.style'
+import styles from './style'
 
 import CORROSIVO from '../../../assets/CORROSIVO.png'
 import EXPLOSIVO from '../../../assets/EXPLOSIVO.png'

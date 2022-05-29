@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import Header from '../../blocks/Header/Header'
+import Header from '../../blocks/Header'
 
 import api from '../../../services/api'
 import {
@@ -9,12 +9,11 @@ import {
 
 import { FaTrashAlt as DeleteIcon } from 'react-icons/fa'
 
-import styles from './Product.style'
+import styles from './style'
 import util from '../../../utils/styles'
 import storage from '../../../services/storage'
-import { RouteComponentProps } from 'react-router'
 import { Models } from '../../../@types'
-import Symbols from '../../blocks/Symbols/Symbols'
+import Symbols from '../../blocks/Symbols'
 
 import CORROSIVO from '../../../assets/CORROSIVO.png'
 import EXPLOSIVO from '../../../assets/EXPLOSIVO.png'
@@ -39,7 +38,7 @@ const symbolsIndex: { [key: string]: string } = {
   TOXICO
 }
 
-const Product: React.FC<RouteComponentProps> = () => {
+const Product: React.FC = () => {
   const [product, setProduct] = useState<Models.Product | Models.NewProduct>()
   const [loading, setLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState<string | null>()

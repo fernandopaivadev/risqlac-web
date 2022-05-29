@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Components } from '../../../@types'
-import styles from './Modal.style'
+import styles from './style'
 import util from '../../../utils/styles'
 
 const Modal: React.FC<Components.Modal> = ({ message, ok, cancel }) =>

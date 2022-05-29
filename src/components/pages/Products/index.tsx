@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import Header from '../../blocks/Header/Header'
-import Modal from '../../blocks/Modal/Modal'
+import Header from '../../blocks/Header'
+import Modal from '../../blocks/Modal'
 
 import api from '../../../services/api'
 import storage from '../../../services/storage'
@@ -9,13 +9,12 @@ import storage from '../../../services/storage'
 import { FaTrashAlt as DeleteIcon } from 'react-icons/fa'
 import { ImLab as ProductIcon } from 'react-icons/im'
 
-import styles from './Products.style'
+import styles from './style'
 import util from '../../../utils/styles'
 import { Models } from '../../../@types'
-import { RouteComponentProps } from 'react-router'
 import navigate from '../../../functions/navigate'
 
-const Products: React.FC<RouteComponentProps> = () => {
+const Products: React.FC = () => {
   const [products, setProducts] = useState<Models.Product[]>([])
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
