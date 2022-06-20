@@ -27,7 +27,8 @@
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-    "v": "sh -c 'npm version ${0} -no-git-tag-version'",
+    "v": "sh -c 'npm version ${0} -no-it-tag-version'",
+    "start": "npx serve dist",
     "update": "yarn upgrade --latest",
     "lint": "eslint --fix src/"
   },
