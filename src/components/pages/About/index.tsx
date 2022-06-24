@@ -89,7 +89,7 @@ const About: React.FC = () => {
       e composição, pictograma de perigo, palavra de advertência, frase de perigo,
       frase de precaução e informações suplementares, segundo a legislação brasileira.
     </p>
-    <p>Exemplo de um rótulo</p>
+    <p>Exemplo de um rótulo:</p>
     <img src={rotulo}>
     </img>
 

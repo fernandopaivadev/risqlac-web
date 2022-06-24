@@ -26,13 +26,6 @@ const Options: React.FC = () => {
         }
         buttons={[
           {
-            name: 'Alterar Senha',
-            color: colorButton,
-            onClick: () => {
-              navigate('/change-password')
-            }
-          },
-          {
             name: 'Lista de usuários',
             color: colorButtonAdmin,
             fontColor: 'var(--white)',
@@ -41,19 +34,10 @@ const Options: React.FC = () => {
             }
           },
           {
-            name: 'Sobre o GHS',
+            name: 'Sobre o RisQLAC',
             color: colorButton,
             onClick: () => {
-              navigate('/login')
-              storage.clear('all')
-            }
-          },
-          {
-            name: 'Créditos',
-            color: colorButton,
-            onClick: () => {
-              navigate('/login')
-              storage.clear('all')
+              navigate('/about')
             }
           },
           {
@@ -79,18 +63,10 @@ const Options: React.FC = () => {
         }
         buttons={[
           {
-            name: 'Alterar Senha',
+            name: 'Sobre o RisQLAC',
             color: colorButton,
             onClick: () => {
-              navigate('/change-password')
-            }
-          },
-          {
-            name: 'Créditos',
-            color: colorButton,
-            onClick: () => {
-              navigate('/login')
-              storage.clear('all')
+              navigate('/about')
             }
           },
           {

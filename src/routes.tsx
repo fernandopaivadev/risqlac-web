@@ -11,7 +11,7 @@ import Product from './components/pages/Product'
 import Products from './components/pages/Products'
 
 import Options from './components/pages/Options'
-
+import About from './components/pages/About'
 
 export default (): ReactElement => {
   const routes: {
@@ -25,6 +25,7 @@ export default (): ReactElement => {
     '/user': () => <User />,
     '/product': () => <Product />,
     '/products': () => <Products />,
+    '/about': () => <About />
   }
 
   const path = location.pathname
