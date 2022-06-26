@@ -263,7 +263,7 @@ const Product: React.FC = () => {
           id='class'
           required
           minLength={3}
-          maxLength={20}
+          maxLength={500}
           defaultValue={product?.class}
           onChange={event => {
             const _product = product
@@ -284,7 +284,7 @@ const Product: React.FC = () => {
           id='subclass'
           required
           minLength={3}
-          maxLength={20}
+          maxLength={500}
           defaultValue={product?.subclass}
           onChange={event => {
             const _product = product
@@ -346,7 +346,7 @@ const Product: React.FC = () => {
         <styles.textarea
           id='precautions'
           required
-          minLength={10}
+          minLength={3}
           maxLength={500}
           defaultValue={product?.precautions}
           onChange={event => {
@@ -366,8 +366,8 @@ const Product: React.FC = () => {
         </styles.label>
         <styles.textarea
           id='quantity'
-          minLength={10}
-          maxLength={10}
+          minLength={3}
+          maxLength={500}
           defaultValue={product?.quantity}
           onChange={event => {
             const _product = product
@@ -386,8 +386,8 @@ const Product: React.FC = () => {
         </styles.label>
         <styles.textarea
           id='due_date'
-          minLength={10}
-          maxLength={20}
+          minLength={3}
+          maxLength={500}
           defaultValue={product?.due_date}
           onChange={event => {
             const _product = product
@@ -406,8 +406,8 @@ const Product: React.FC = () => {
         </styles.label>
         <styles.textarea
           id='batch'
-          minLength={10}
-          maxLength={20}
+          minLength={3}
+          maxLength={500}
           defaultValue={product?.batch}
           onChange={event => {
             const _product = product
@@ -426,8 +426,8 @@ const Product: React.FC = () => {
         </styles.label>
         <styles.textarea
           id='location'
-          minLength={10}
-          maxLength={20}
+          minLength={3}
+          maxLength={500}
           defaultValue={product?.location}
           onChange={event => {
             const _product = product
