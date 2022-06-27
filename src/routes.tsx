@@ -12,6 +12,7 @@ import Products from './components/pages/Products'
 
 import Options from './components/pages/Options'
 import About from './components/pages/About'
+import TermsOfUse from './components/pages/TermsOfUse'
 
 export default (): ReactElement => {
   const routes: {
@@ -25,7 +26,8 @@ export default (): ReactElement => {
     '/user': () => <User />,
     '/product': () => <Product />,
     '/products': () => <Products />,
-    '/about': () => <About />
+    '/about': () => <About />,
+    '/terms-of-use': () => <TermsOfUse />
   }
 
   const path = location.pathname

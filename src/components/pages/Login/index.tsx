@@ -144,6 +144,9 @@ const Login: React.FC = () => {
         </styles.password>
 
         <InfoIcon
+          onClick={() => {
+            navigate('/terms-of-use')
+          }}
           className='icon'
         />
 
