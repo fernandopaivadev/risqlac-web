@@ -53,9 +53,9 @@ const Product: React.FC = () => {
         setLoading(true)
         const result = await api.request({
           method: 'get',
-          route: '/product/data',
+          route: '/product/list',
           query: {
-            id: productId
+            productId
           }
         })
 

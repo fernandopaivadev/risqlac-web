@@ -48,7 +48,7 @@ const Products: React.FC = () => {
       method: 'delete',
       route: '/product/delete',
       query: {
-        id: productId
+        productId
       }
     })
 

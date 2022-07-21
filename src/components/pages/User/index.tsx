@@ -24,9 +24,9 @@ const User: React.FC = () => {
   const getUserData = async () => {
     const result = await api.request({
       method: 'get',
-      route: '/user/data',
+      route: '/user/list',
       query: {
-        id: userId
+        userId
       }
     })
 
