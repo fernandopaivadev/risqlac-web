@@ -7,8 +7,7 @@ import {
 import navigate from '../functions/navigate'
 import storage from './storage'
 
-// const baseURL = 'https://api.risqlac.com'
-const baseURL = 'http://localhost:3000'
+const baseURL = 'http://api.risqlac.com.br'
 
 const Axios = axios.create({
   baseURL
@@ -18,11 +17,12 @@ Axios.interceptors.request.use(async (config: AxiosRequestConfig) => {
   const token = storage.read('token')
 
   if (token && config.headers) {
-    config.headers.authorization = `Bearer ${token}`
+    config.headers.authorization = token
   }
 
   return config
 })
+
 const request = async ({
   method,
   route,

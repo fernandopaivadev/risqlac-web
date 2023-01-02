@@ -10,7 +10,7 @@ import util from '../../../utils/styles'
 import navigate from '../../../functions/navigate'
 
 const ForgotPassword: React.FC = () => {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
@@ -23,7 +23,7 @@ const ForgotPassword: React.FC = () => {
       method: 'get',
       route: '/user/forgot-password',
       query: {
-        username
+        email
       }
     })
 
@@ -70,7 +70,7 @@ const ForgotPassword: React.FC = () => {
           <styles.input
             required
             onChange={event => {
-              setUsername(event.target.value)
+              setEmail(event.target.value)
             }}
           />
         </>

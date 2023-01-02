@@ -47,7 +47,7 @@ const Users: React.FC = () => {
       method: 'delete',
       route: '/user/delete',
       query: {
-        userId
+        id: userId
       }
     })
 

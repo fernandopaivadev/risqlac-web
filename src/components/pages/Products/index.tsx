@@ -48,7 +48,7 @@ const Products: React.FC = () => {
       method: 'delete',
       route: '/product/delete',
       query: {
-        productId
+        id: productId
       }
     })
 
@@ -130,13 +130,17 @@ const Products: React.FC = () => {
             </div>
           </styles.searchContainer>
 
-          <util.classicButton
-            onClick={() => {
-              navigate('/product')
-            }}
-          >
-            Novo produto
-          </util.classicButton>
+          {isAdmin ?
+            <util.classicButton
+              onClick={() => {
+                navigate('/product')
+              }}
+            >
+              Novo produto
+            </util.classicButton>
+            : null
+          }
+
           {productsToShow.map((product, index) =>
             <styles.container
               key={index}
@@ -174,14 +178,16 @@ const Products: React.FC = () => {
         </styles.list>
         :
         <styles.noProduct>
-          <util.classicButton
-            onClick={() => {
-              navigate('/product')
-            }}
-          >
-            Novo produto
-          </util.classicButton>
-
+          {isAdmin ?
+            <util.classicButton
+              onClick={() => {
+                navigate('/product')
+              }}
+            >
+              Novo produto
+            </util.classicButton>
+            : null
+          }
           <p>Não há produtos cadastrados.</p>
         </styles.noProduct>
       :

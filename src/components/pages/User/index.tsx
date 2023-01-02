@@ -26,12 +26,15 @@ const User: React.FC = () => {
       method: 'get',
       route: '/user/list',
       query: {
-        userId
+        id: userId
       }
     })
 
     if (result?.status === 200) {
-      setUser(result?.data?.user)
+      console.log(result?.data?.users)
+      setUser(result?.data?.users
+        .filter((user: any) => user.id === Number(userId))[0]
+      )
     }
   }
 
@@ -221,7 +224,7 @@ const User: React.FC = () => {
           defaultValue={
             userId ?
               user?.is_admin ? 'admin' : 'student'
-              : ''
+              : 'student'
           }
           onChange={event => {
             user ?
@@ -230,7 +233,7 @@ const User: React.FC = () => {
           }}
         >
           <option></option>
-          <option value='student'>Aluno</option>
+          <option value='student' defaultChecked>Aluno</option>
           <option value='admin'>Professor/Técnico</option>
         </styles.select>
 

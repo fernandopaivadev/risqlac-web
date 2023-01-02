@@ -17,7 +17,7 @@ import util from '../../../utils/styles'
 import navigate from '../../../functions/navigate'
 
 const Login: React.FC = () => {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState(false)
@@ -32,7 +32,7 @@ const Login: React.FC = () => {
       method: 'get',
       route: '/user/login',
       query: {
-        username,
+        email,
         password
       }
     })
@@ -40,14 +40,13 @@ const Login: React.FC = () => {
     if (result?.status === 200) {
       const result = await api.request({
         method: 'get',
-        route: '/user/data',
-        query: {
-          token: storage.read('token')
-        }
+        route: '/user/list'
       })
 
       if (result?.status === 200) {
-        storage.write('loggedUser', result.data?.user)
+        storage.write('loggedUser', result.data?.users
+          .filter((user: any) => user.email === email)[0]
+        )
         navigate('/products')
       } else {
         setLoading(false)
@@ -106,7 +105,7 @@ const Login: React.FC = () => {
           data-testid='email'
           required
           onChange={event => {
-            setUsername(event.target.value)
+            setEmail(event.target.value)
           }}
           placeholder='E-mail ou nome de usuário'
         />

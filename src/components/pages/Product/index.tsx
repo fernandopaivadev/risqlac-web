@@ -42,7 +42,7 @@ const Product: React.FC = () => {
   const [product, setProduct] = useState<Models.Product | Models.NewProduct>()
   const [loading, setLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState<string | null>()
-  const [isAdmin] = useState(storage.read('user')?.is_admin)
+  const [isAdmin] = useState(storage.read('loggedUser')?.is_admin)
   const [productId] = useState(window.location.href.split('?')[1])
   const [showModal, setShowModal] = useState(false)
   const [symbols, setSymbols] = useState<string>()
@@ -55,12 +55,12 @@ const Product: React.FC = () => {
           method: 'get',
           route: '/product/list',
           query: {
-            productId
+            id: productId
           }
         })
 
         if (result?.status === 200) {
-          const _product = result?.data?.product
+          const _product = result?.data?.products[0]
           setProduct(_product)
           setSymbols(_product.symbols)
           setLoading(false)

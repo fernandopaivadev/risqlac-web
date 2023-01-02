@@ -34,6 +34,13 @@ const Options: React.FC = () => {
             }
           },
           {
+            name: 'Lista de produtos',
+            color: colorButton,
+            onClick: () => {
+              navigate('/products')
+            }
+          },
+          {
             name: 'Sobre o RisQLAC',
             color: colorButton,
             onClick: () => {
@@ -62,6 +69,13 @@ const Options: React.FC = () => {
           }
         }
         buttons={[
+          {
+            name: 'Lista de produtos',
+            color: colorButton,
+            onClick: () => {
+              navigate('/products')
+            }
+          },
           {
             name: 'Sobre o RisQLAC',
             color: colorButton,

@@ -31,8 +31,7 @@
     }
   ],
   "editor.fontLigatures": true,
-  "editor.fontSize": 16,
-  "workbench.colorTheme": "Dracula",
+  "editor.fontSize": 14,
   "workbench.activityBar.visible": false,
   "editor.tabSize": 2
 }
