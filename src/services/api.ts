@@ -13,16 +13,6 @@ const Axios = axios.create({
   baseURL
 })
 
-Axios.interceptors.request.use(async (config: AxiosRequestConfig) => {
-  const token = storage.read('token')
-
-  if (token && config.headers) {
-    config.headers.authorization = token
-  }
-
-  return config
-})
-
 const request = async ({
   method,
   route,
@@ -33,12 +23,22 @@ const request = async ({
 }: APIRequest.Options): Promise<APIRequest.Response | null> => {
   let statusError: APIRequest.Response['status'] | null = null
 
+  const token = storage.read('token')
+
+  const headers = formData ?
+  {
+    'Authorization': token ?? '',
+    'Content-Type': 'multipart/form-data'
+  } : {
+    'Authorization': token ?? ''
+  }
+
   const response: any = await Axios({
     method,
     url: route,
     params: query ? new URLSearchParams({ ...query }) : undefined,
     data: formData ? formData : body,
-    headers: formData ? { 'Content-Type': 'multipart/form-data' } : undefined
+    headers
   }).catch((err: AxiosError) => {
     statusError = err.response ? err.response.status : null
 
