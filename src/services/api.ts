@@ -7,7 +7,7 @@ import {
 import navigate from '../functions/navigate'
 import storage from './storage'
 
-const baseURL = 'http://api.risqlac.com.br'
+const baseURL = 'https://api.risqlac.com.br'
 
 const Axios = axios.create({
   baseURL

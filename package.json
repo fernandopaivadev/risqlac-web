@@ -1,6 +1,6 @@
 {
   "name": "risqlab-web",
-  "version": "1.4.0",
+  "version": "1.5.1",
   "private": true,
   "dependencies": {
     "axios": "^1.2.2",
@@ -10,10 +10,8 @@
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/jest": "^29.2.5",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
@@ -28,15 +26,16 @@
     "dev": "vite --host --port 3001",
     "build": "vite build",
     "preview": "vite preview",
-    "v": "sh -c 'npm version ${0} -no-git-tag-version'",
-    "start": "yarn build && npx serve dist",
+    "patch": "npm version patch -no-git-tag-version",
+    "minor": "npm version minor -no-git-tag-version",
+    "major": "npm version major -no-git-tag-version",
+    "start": "npm run build && npx serve dist",
     "update": "ncu -u",
     "lint": "eslint --fix src/"
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
