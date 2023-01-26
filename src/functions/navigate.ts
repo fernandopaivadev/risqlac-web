@@ -3,7 +3,7 @@ export default (path: string): void => {
 
   const url = `${
     baseUrl
-  }${
+  }/#${
     path
   }`
 
