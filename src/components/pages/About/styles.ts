@@ -1,6 +1,17 @@
 import styled from 'styled-components'
 
 const main = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   width: 100vw;
   min-height: 100%;
   background: var(--white);
@@ -32,8 +43,19 @@ const main = styled.div`
     width: 90%;
     margin: 2rem;
   }
+
+    @media (orientation: landscape) {
+    .container {
+      width: 80%;
+    }
+    .container {
+      img {
+        width: 25%;
+      }
+    }
+  }
 `
 
 export default {
-  main
+  main,
 }
