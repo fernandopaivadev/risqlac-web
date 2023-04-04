@@ -6,6 +6,19 @@ import storage from '../../../services/storage'
 import Buttons from '../../blocks/Buttons'
 
 import styles from './styles'
+import api from '../../../services/api'
+
+const logout = async () => {
+  const response = await api.request({
+    method: 'DELETE',
+    route: '/user/logout'
+  })
+
+  if (response?.status === 200) {
+    navigate('/login')
+    storage.clear('all')
+  }
+}
 
 const Options: React.FC = () => {
   const isAdmin = storage.read('loggedUser')?.is_admin
@@ -50,10 +63,7 @@ const Options: React.FC = () => {
           {
             name: 'Sair',
             color: colorButton,
-            onClick: () => {
-              navigate('/login')
-              storage.clear('all')
-            }
+            onClick: logout
           }
         ]}
       />
@@ -86,10 +96,7 @@ const Options: React.FC = () => {
           {
             name: 'Sair',
             color: colorButton,
-            onClick: () => {
-              navigate('/login')
-              storage.clear('all')
-            }
+            onClick: logout
           }
         ]}
       />

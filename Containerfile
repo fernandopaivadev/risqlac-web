@@ -7,9 +7,8 @@ WORKDIR /usr/server/$APP_NAME
 
 COPY . .
 
-RUN npm i && \
-    npm run build
+RUN npm ci
 
 EXPOSE 3000
 
-CMD npx serve dist
+CMD npm start
