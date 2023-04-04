@@ -43,7 +43,6 @@ export namespace Models {
     password: string
   }
 
-
   type Users = {
     id: number
     username: string
