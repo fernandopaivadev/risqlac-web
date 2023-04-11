@@ -5,9 +5,13 @@ ENV NODE_ENV=production
 
 WORKDIR /usr/server/$APP_NAME
 
-COPY . .
+ENV PATH /app/node_modules/.bin:$PATH
 
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm ci
+
+COPY . .
 
 EXPOSE 3000
 
