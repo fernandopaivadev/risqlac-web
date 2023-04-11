@@ -30,7 +30,7 @@ const Login: React.FC = () => {
 
 		const result = await api.request({
 			method: 'get',
-			route: '/user/login',
+			route: '/session/login',
 			query: {
 				email,
 				password

@@ -11,7 +11,7 @@ import api from '../../../services/api'
 const logout = async () => {
 	const response = await api.request({
 		method: 'DELETE',
-		route: '/user/logout'
+		route: '/session/logout'
 	})
 
 	if (response?.status === 200) {
