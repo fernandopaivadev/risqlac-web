@@ -1,9 +1,9 @@
 import React from 'react'
 
 import {
-  createHashRouter,
-  RouterProvider,
-  HashRouter
+	createHashRouter,
+	RouterProvider,
+	HashRouter
 } from "react-router-dom";
 
 import { createRoot } from "react-dom/client";
@@ -25,22 +25,22 @@ import TermsOfUse from './components/pages/TermsOfUse'
 import GlobalStyle from './style';
 
 const router = createHashRouter([
-  { path: '/', element: <Login /> },
-  { path: '/login', element: <Login /> },
-  { path: '/options', element: <Options /> },
-  { path: '/forgot-password', element: <ForgotPassword /> },
-  { path: '/reset-password', element: <ResetPassword /> },
-  { path: '/users', element: <Users /> },
-  { path: '/user', element: <User /> },
-  { path: '/product', element: <Product /> },
-  { path: '/products', element: <Products /> },
-  { path: '/about', element: <About /> },
-  { path: '/terms-of-use', element: <TermsOfUse /> }
+	{ path: '/', element: <Login /> },
+	{ path: '/login', element: <Login /> },
+	{ path: '/options', element: <Options /> },
+	{ path: '/forgot-password', element: <ForgotPassword /> },
+	{ path: '/reset-password', element: <ResetPassword /> },
+	{ path: '/users', element: <Users /> },
+	{ path: '/user', element: <User /> },
+	{ path: '/product', element: <Product /> },
+	{ path: '/products', element: <Products /> },
+	{ path: '/about', element: <About /> },
+	{ path: '/terms-of-use', element: <TermsOfUse /> }
 ])
 
 createRoot(document.getElementById("root") as Element).render(
-  <>
-    <GlobalStyle />
-    <RouterProvider router={router} />
-  </>
+	<>
+		<GlobalStyle />
+		<RouterProvider router={router} />
+	</>
 )

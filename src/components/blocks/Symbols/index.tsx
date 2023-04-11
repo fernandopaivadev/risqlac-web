@@ -14,79 +14,79 @@ import PERIGO_AO_MEIO_AMBIENTE from '../../../assets/PERIGO_AO_MEIO_AMBIENTE.png
 import TOXICO from '../../../assets/TOXICO.png'
 
 const symbolsIndex: { [key: string]: string } = {
-  CORROSIVO,
-  EXPLOSIVO,
-  GAS_SOB_PRESSAO,
-  INFLAMAVEL,
-  IRRITANTE,
-  OXIDANTE,
-  PERIGO_A_SAUDE,
-  PERIGO_AO_MEIO_AMBIENTE,
-  TOXICO
+	CORROSIVO,
+	EXPLOSIVO,
+	GAS_SOB_PRESSAO,
+	INFLAMAVEL,
+	IRRITANTE,
+	OXIDANTE,
+	PERIGO_A_SAUDE,
+	PERIGO_AO_MEIO_AMBIENTE,
+	TOXICO
 }
 
 const Symbols: React.FC<Components.Symbols> = ({ storeSymbolId, taskOnCancel }) => {
-  const [error, setError] = useState(false)
-  const [symbolName, setSymbolName] = useState<string>()
+	const [error, setError] = useState(false)
+	const [symbolName, setSymbolName] = useState<string>()
 
-  return <styles.main>
-    <styles.window>
-      {symbolName && symbolsIndex[symbolName] ?
-        <img
-          src={symbolsIndex[symbolName]}
-          alt='Sem imagem'
-        />
-        : null
-      }
+	return <styles.main>
+		<styles.window>
+			{symbolName && symbolsIndex[symbolName] ?
+				<img
+					src={symbolsIndex[symbolName]}
+					alt='Sem imagem'
+				/>
+				: null
+			}
 
-      <>
-        <select
-          id='select'
-          onChange={event => {
-            setSymbolName(
-              String(event.target.value).toUpperCase()
-            )
-          }}
-        >
+			<>
+				<select
+					id='select'
+					onChange={event => {
+						setSymbolName(
+							String(event.target.value).toUpperCase()
+						)
+					}}
+				>
 
-          <option>Escolha o pictograma</option>
-          {Object.keys(symbolsIndex).map(item =>
-            <option>{item.toUpperCase()}</option>
-          )}
-        </select>
+					<option>Escolha o pictograma</option>
+					{Object.keys(symbolsIndex).map(item =>
+						<option>{item.toUpperCase()}</option>
+					)}
+				</select>
 
-        <div className='buttons'>
-          <util.classicButton
-            onClick={() => {
-              if (symbolName) {
-                storeSymbolId(symbolName)
-              } else {
-                setError(true)
-                setTimeout(() => {
-                  setError(false)
-                }, 3000)
-              }
-            }}
-          >
-            Selecionar
-          </util.classicButton>
+				<div className='buttons'>
+					<util.classicButton
+						onClick={() => {
+							if (symbolName) {
+								storeSymbolId(symbolName)
+							} else {
+								setError(true)
+								setTimeout(() => {
+									setError(false)
+								}, 3000)
+							}
+						}}
+					>
+						Selecionar
+					</util.classicButton>
 
-          <util.criticalButton
-            onClick={taskOnCancel}
-          >
-            Cancelar
-          </util.criticalButton>
-        </div>
-      </>
+					<util.criticalButton
+						onClick={taskOnCancel}
+					>
+						Cancelar
+					</util.criticalButton>
+				</div>
+			</>
 
-      {error ?
-        <p className='error-message'>
-          Por favor escolha um pictograma
-        </p>
-        : null
-      }
-    </styles.window>
-  </styles.main>
+			{error ?
+				<p className='error-message'>
+					Por favor escolha um pictograma
+				</p>
+				: null
+			}
+		</styles.window>
+	</styles.main>
 }
 
 export default Symbols

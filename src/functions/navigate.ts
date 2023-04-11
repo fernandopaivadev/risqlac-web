@@ -1,11 +1,7 @@
 export default (path: string): void => {
-  const baseUrl = location.origin
+	const baseUrl = location.origin
 
-  const url = `${
-    baseUrl
-  }/#${
-    path
-  }`
+	const url = `${baseUrl}/#${path}`
 
-  location.replace(url)
+	location.replace(url)
 }
