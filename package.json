@@ -23,8 +23,9 @@
 	},
 	"scripts": {
 		"preview": "vite preview",
+		"build": "vite build",
 		"dev": "vite --host --port 3001",
-		"start": "vite build && npx serve dist",
+		"start": "npx serve dist",
 		"update": "ncu -u"
 	},
 	"eslintConfig": {
