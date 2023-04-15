@@ -3,7 +3,6 @@ import React from 'react'
 import {
 	createHashRouter,
 	RouterProvider,
-	HashRouter
 } from "react-router-dom";
 
 import { createRoot } from "react-dom/client";

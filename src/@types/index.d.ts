@@ -24,7 +24,6 @@ export namespace APIRequest {
 export namespace Models {
 	interface User {
 		id: string
-		username: string
 		is_admin: boolean
 		name: string
 		password?: string
@@ -35,14 +34,6 @@ export namespace Models {
 	}
 
 	type NewUser = Omit<NewUser, "id", "created_at", "updated_at">
-
-	type Users = {
-		id: number
-		username: string
-		email: string
-		phone: string
-		is_admin: string
-	}[]
 
 	interface Product {
 		id: string

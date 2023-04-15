@@ -46,10 +46,9 @@ const User: React.FC = () => {
 				setLoading(false)
 			} else {
 				const _user = {
-					username: '',
 					name: '',
-					phone: '',
 					email: '',
+					phone: '',
 					password: '',
 					is_admin: false
 				}
@@ -108,19 +107,40 @@ const User: React.FC = () => {
 
 		{!loading ?
 			<styles.form id='user-form'>
-				<styles.label htmlFor='nameUC'>
-					Nome de usuário*
+				<styles.label htmlFor='person-name'>
+					Nome
 				</styles.label>
 				<styles.input
-					id='nameUC'
-					required
+					id='person-name'
 					minLength={3}
-					maxLength={20}
-					defaultValue={user?.username}
+					maxLength={64}
+					required
+					defaultValue={user?.name}
 					onChange={event => {
 						const _user = user
-						typeof _user?.username === 'string' ?
-							_user.username = event.target.value
+						typeof _user?.name === 'string' ?
+							_user.name = event.target.value
+							: null
+						setUser(_user)
+					}}
+				/>
+				<p className='error-message'>
+					Digite no mínimo 3 caracteres.
+				</p>
+
+				<styles.label htmlFor='email'>
+					Email*
+				</styles.label>
+				<styles.input
+					id='email'
+					required
+					minLength={6}
+					maxLength={32}
+					defaultValue={user?.email}
+					onChange={event => {
+						const _user = user
+						typeof _user?.email === 'string' ?
+							_user.email = event.target.value
 							: null
 						setUser(_user)
 					}}
@@ -151,26 +171,6 @@ const User: React.FC = () => {
 					Digite um número de telefone válido.
 				</p>
 
-				<styles.label htmlFor='email'>
-					Email*
-				</styles.label>
-				<styles.input
-					id='email'
-					required
-					minLength={6}
-					maxLength={32}
-					defaultValue={user?.email}
-					onChange={event => {
-						const _user = user
-						typeof _user?.email === 'string' ?
-							_user.email = event.target.value
-							: null
-						setUser(_user)
-					}}
-				/>
-				<p className='error-message'>
-					Digite no mínimo 6 caracteres.
-				</p>
 				{userId ?
 					null
 					:
@@ -198,27 +198,6 @@ const User: React.FC = () => {
 						</p>
 					</>
 				}
-
-				<styles.label htmlFor='person-name'>
-					Nome
-				</styles.label>
-				<styles.input
-					id='person-name'
-					minLength={3}
-					maxLength={64}
-					required
-					defaultValue={user?.name}
-					onChange={event => {
-						const _user = user
-						typeof _user?.name === 'string' ?
-							_user.name = event.target.value
-							: null
-						setUser(_user)
-					}}
-				/>
-				<p className='error-message'>
-					Digite no mínimo 3 caracteres.
-				</p>
 
 				<styles.select
 					defaultValue={

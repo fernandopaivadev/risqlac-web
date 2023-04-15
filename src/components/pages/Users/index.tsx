@@ -110,7 +110,6 @@ const Users: React.FC = () => {
 									>
 										{user.name}
 									</p>
-									<p>{user.username}</p>
 									{user?.is_admin ?
 										<p
 											className='status'
